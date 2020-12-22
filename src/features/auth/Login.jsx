@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from 'react';
 import { login } from './authSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { Form, Button,Container,Row, Col,Jumbotron } from 'react-bootstrap';
+import { Form, Button,Container,Row, Col,Jumbotron,Spinner } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
 export function Login() {
@@ -46,29 +46,38 @@ export function Login() {
 
     return (
         <div style={{textAlign:"center"}}>
-            <Container style={{borderRadius:"30px",marginTop:"150px", backgroundColor:"#f8f9fa", width:"800px"}}>
+            <Container style={{borderRadius:"30px",marginTop:"150px", 
+            boxShadow:"0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+            backgroundColor:"white", width:"800px"}}>
                 <Row>
-                    <Col style={{backgroundColor:"#007bff", borderRadius:"30px 0px 0px 30px"}}>
-                    <Jumbotron style={{backgroundColor:"#007bff", borderRadius:"30px 0px 0px 30px", color:"white"}}>
-                        <h1>Welcome to Internet Banking Application</h1>
-                    </Jumbotron>
+                    <Col style={{backgroundColor:"#374785", borderRadius:"30px 0px 0px 30px"}}>
+                        <Jumbotron style={{backgroundColor:"#374785", borderRadius:"30px 0px 0px 30px", color:"white"}}>
+                            <h1 style={{fontSize:"40px"}}>Welcome to Internet Banking</h1>
+                            <p style={{marginTop:"25px", fontSize:"20px"}}>
+                                We provide you the easiest way to transfer your money to everyone
+                            </p>
+                        </Jumbotron>
                     </Col>
                     <Col>
                         <Form onSubmit={handleLogin} style={{height:"100px", width:"250px",display:"inline-block" ,textAlign:"left", marginTop:"50px"}}>
                             
                             <Form.Group style={{textAlign:"center"}}>
-                                <h3>Sign in</h3>
+                                <h3 style={{ color:"#24305E"}}>Sign in</h3>
                             </Form.Group>
                             {loggedIn === false && alert === true ? <h6 style={{ color: "red" }}>Incorrect username or password</h6> : null}
                             <Form.Group>
-                                <Form.Control  onChange={event => setUsername(event.target.value)} placeholder="Username;" />
+                                <Form.Control value={username} onChange={event => setUsername(event.target.value)} placeholder="Username" />
                             </Form.Group>
 
-                            <Form.Group>
-                                <Form.Control  onChange={event => setPassword(event.target.value)} type="password" placeholder="Password" />
+                            <Form.Group style={{marginBottom:"0"}}>
+                                <Form.Control value={password} onChange={event => setPassword(event.target.value)} type="password" placeholder="Password" />
                             </Form.Group>
 
-                            <Button variant="primary" type="submit" style={{width:"inherit", marginTop:"10px"}}> Sign in </Button>
+                            <div align="end">
+                                <a style={{fontSize:"13px", textDecoration:"none", color:"#374785"}} href="">Forget your password</a>
+                            </div>
+
+                            <Button type="submit" style={{width:"inherit", marginTop:"20px", backgroundColor:"#374785"}}> Sign in </Button>
                         </Form>
                         
                     </Col>

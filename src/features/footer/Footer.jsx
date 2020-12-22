@@ -1,23 +1,27 @@
 import React from 'react';
-import {Container, Row, Col,Card} from 'react-bootstrap';
+import {Container, Row, Col} from 'react-bootstrap';
+import {useSelector} from 'react-redux';
 
 function Footer() {
+    const loggedIn = useSelector(state => state.auth.loggedIn);
+
     return (
-        <div style={{backgroundColor:"#343a40"}}>
-            <Container style={{color:"white"}}>
-                <Row style={{paddingTop:"20px"}}>
+        <div style={{backgroundColor:"white", marginTop:"150px"}}>
+            {localStorage.access_token !=='' || loggedIn===true
+            ?<Container style={{color:"#24305E"}}>
+                <Row style={{paddingTop:"20px", marginLeft:"0"}}>
                     <Col xs={4} style={{padding:"0"}}>
                         <ul style={{listStyle:"none", padding:"0"}}>
                             <li style={{fontSize:"22px"}}><b>Internet Banking Application</b></li>
                             <li style={{fontSize:"14px", marginTop:"10px"}}>
                                 We provide you the easiest way to transfer money to everyone. 
-                                Let's connect with us by following soical network </li>
-                            <li style={{fontSize:"18px", marginTop:"8px"}}>Social Network</li>
+                                Let's connect with us by the following social networks </li>
+                            <li style={{fontSize:"18px", marginTop:"8px", fontWeight:"600"}}>Social Networks:</li>
                             <li>
                                 <ul style={{display:"flex", justifyContent:"space-around", padding:"0px 121px"}}>
                                     <li style={{display:"inline-block"}}><i style={{fontSize:"xx-large"}} className="fab fa-instagram-square"></i></li>
                                     <li style={{display:"inline-block"}}><i style={{fontSize:"xx-large"}} className="fab fa-facebook-square"></i></li>
-                                    <li style={{display:"inline-block"}}><i style={{fontSize:"xx-large"}} class="fab fa-twitter-square"></i></li>
+                                    <li style={{display:"inline-block"}}><i style={{fontSize:"xx-large"}} className="fab fa-twitter-square"></i></li>
                                 </ul>
                             </li>
                         </ul>
@@ -41,10 +45,11 @@ function Footer() {
                         </ul>
                     </Col>
                 </Row>
-                <Row style={{marginTop:"15px"}}>
-                    <h6 style={{fontSize:"13px"}}>Copyright © 2020 Internet Banking Application. All Right Reserved</h6>
+                <Row style={{marginTop:"15px",marginLeft:"0"}}>
+                    <h6 style={{fontSize:"13px", fontWeight:"700"}}>Copyright © 2020 Internet Banking. All Right Reserved</h6>
                 </Row>  
             </Container>
+            :null}
         </div>
     );
 }

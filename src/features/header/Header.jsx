@@ -1,5 +1,5 @@
-import React from 'react';
-import {Navbar,Nav} from 'react-bootstrap';
+import React,{useState} from 'react';
+import {Navbar,Nav, Container} from 'react-bootstrap';
 import {useDispatch, useSelector} from 'react-redux';
 import {logout} from '../auth/authSlice';
 
@@ -12,41 +12,49 @@ function Header() {
     }
 
     return (
-        <div>
-            {localStorage.access_token !=='' || loggedIn===true
-            ?<Navbar bg="dark" style={{backgroundColor:"black"}} expand="lg">
-                <Navbar.Brand style={{color:"white", fontSize:"100"}} href="/customer/homepage">Internet Banking</Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="mr-auto">
-                        <Nav>
-                            <Nav.Link style={{color:"white"}} href="/customer/homepage">Overview</Nav.Link>
-                            <Nav.Link style={{color:"white"}} href="#Account">Account</Nav.Link>
-                            <Nav.Link style={{color:"white"}} href="#Transaction">Transaction</Nav.Link>
-                            <Nav.Link style={{color:"white"}} href="/customer/history">History</Nav.Link>
-                            <Nav.Link style={{color:"white"}} href="#Receiver">Receiver List</Nav.Link>
+        <div style={{backgroundColor:"white"}}>
+            <Container style={{paddingLeft:"0px", paddingRight:"0px"}}>
+                {localStorage.access_token !=='' || loggedIn===true
+                ?<Navbar expand="lg">
+                    <Navbar.Brand style={{color:"#24305E", fontSize:"100", fontWeight:"700"}} href="/customer/homepage">
+                        Internet Banking
+                    </Navbar.Brand>
+                        <Nav className="mr-auto" style={{fontWeight:"500"}}>
+                                <Nav.Link style={{color:"#24305E"}} href="/customer/homepage">
+                                    Overview
+                                </Nav.Link>
+                                <Nav.Link style={{color:"#24305E"}} href="#Account">
+                                    Account
+                                </Nav.Link>
+                                <Nav.Link style={{color:"#24305E"}} href="#Transaction">
+                                    Transaction
+                                </Nav.Link>
+                                <Nav.Link style={{color:"#24305E"}} href="/customer/history">
+                                    History
+                                </Nav.Link>
+                                <Nav.Link style={{color:"#24305E"}} href="/customer/receiver">
+                                    Receiver List
+                                </Nav.Link>
                         </Nav>
-                    </Nav>
-
-                    <Nav style={{marginLeft:"50px"}}>
-                        <Nav className="justify-content-end" activeKey="/home">
-                            <Nav.Item>
-                                <Nav.Link style={{color:"white"}} href="/customer/profile"><i style={{marginRight:"5px"}} className="fas fa-user"></i>{localStorage.username}</Nav.Link>
-                            </Nav.Item>
-
-                            <Nav.Item>
-                                <Nav.Link style={{color:"white"}} href="/customer/profile"><i style={{marginRight:"5px"}}  className="fas fa-bell"></i>Notification</Nav.Link>
-                            </Nav.Item>
-
-                            <Nav.Item>
-                                <Nav.Link style={{color:"white"}} href="/" onClick={handleLogout}><i style={{marginRight:"5px"}} className="fas fa-sign-out-alt"></i>Sign out</Nav.Link>
-                            </Nav.Item>
+                        <Nav style={{marginLeft:"50px"}} className="justify-content-end">
+                                <Nav.Link style={ {color:"#24305E"}} 
+                                    href="/customer/profile">
+                                        <i style={{marginRight:"5px"}} className="fas fa-user"></i>{localStorage.username}
+                                    </Nav.Link>
+                                <Nav.Link style={  {color:"#24305E"}} 
+                                    href="/customer/profile">
+                                        <i style={{marginRight:"5px"}}  className="fas fa-bell"></i>Notification
+                                    </Nav.Link>
+                                <Nav.Link style={{color:"#24305E"}} 
+                                    href="/" 
+                                    onClick={handleLogout}>
+                                        <i style={{marginRight:"5px"}} className="fas fa-sign-out-alt"></i>
+                                    Sign out
+                                </Nav.Link>
                         </Nav>
-                    </Nav>
-
-                </Navbar.Collapse>
-            </Navbar>
-            :null}
+                </Navbar>
+                :null}
+            </Container>
         </div>
     );
 }

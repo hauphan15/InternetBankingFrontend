@@ -5,6 +5,8 @@ import PrivateRoute from './features/auth/PrivateRoute';
 import Header from './features/header/Header';
 import History from './features/customer/History';
 import Footer from './features/footer/Footer';
+import Receiver from './features/customer/Receiver';
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -19,6 +21,7 @@ function App() {
           <Switch>
             <PrivateRoute path='/customer/homepage' component={CustomerHomePage}/> 
             <PrivateRoute path='/customer/history' component={History}/> 
+            <PrivateRoute path='/customer/receiver' component={Receiver}/> 
             <Route path="/"> 
                 <Login /> 
             </Route>
