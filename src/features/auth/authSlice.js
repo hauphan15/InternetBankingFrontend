@@ -18,6 +18,7 @@ export const authSlice = createSlice({
                 state.permission = action.payload.userInfo.permission;
                 state.username = action.payload.userInfo.UserLogin;
                 state.accessToken = action.payload.accessToken;
+                state.notification = action.payload.notification;
                 localStorage.setItem('access_token', action.payload.accessToken);
                 localStorage.setItem('username', action.payload.userInfo.UserLogin);
                 localStorage.setItem('userID', action.payload.userInfo.ID);
@@ -35,12 +36,15 @@ export const authSlice = createSlice({
             state.userID = null;
             state.permission = '';
             state.username = '';
+            state.notification = null;
             localStorage.setItem('access_token', '');
+            localStorage.setItem('username', '');
+            localStorage.setItem('userID', '');
         }
     },
 });
 
-export const { logout, setUserInfo } = authSlice.actions;
+export const { logout, setUserInfo, seenAllNotification } = authSlice.actions;
 
 export const login = (username, password) => async dispatch => {
     const response = await axios.post(`http://localhost:3001/login`, { username: username, password: password });

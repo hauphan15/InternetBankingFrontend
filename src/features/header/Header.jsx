@@ -1,14 +1,29 @@
-import React,{useState} from 'react';
+import React,{useEffect} from 'react';
 import {Navbar,Nav, Container} from 'react-bootstrap';
 import {useDispatch, useSelector} from 'react-redux';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import Badge from '@material-ui/core/Badge';
 import {logout} from '../auth/authSlice';
+import {getAllNotificationAsync, seenAllNotificationAsync} from './headerSlice';
 
 function Header() {
     const dispatch = useDispatch();
+    const dispatch1 = useDispatch();
+    const dispatch2 = useDispatch();
     const loggedIn = useSelector(state => state.auth.loggedIn);
 
+    const notifications = useSelector(state => state.header.notification);  
+
+    useEffect(() => {
+        dispatch1(getAllNotificationAsync());
+    }, []);
+
     function handleLogout(){
-        dispatch(logout());
+        dispatch(logout())
+    }
+
+    function handleClickBell(){
+        dispatch2(seenAllNotificationAsync());
     }
 
     return (
@@ -41,9 +56,10 @@ function Header() {
                                     href="/customer/profile">
                                         <i style={{marginRight:"5px"}} className="fas fa-user"></i>{localStorage.username}
                                     </Nav.Link>
-                                <Nav.Link style={  {color:"#24305E"}} 
-                                    href="/customer/profile">
-                                        <i style={{marginRight:"5px"}}  className="fas fa-bell"></i>Notification
+                                <Nav.Link style={{color:"#24305E"}} 
+                                    onClick={handleClickBell} 
+                                    href="/customer/homepage" >
+                                        <Badge badgeContent={notifications.length} color="secondary"><NotificationsIcon/></Badge> Notification
                                     </Nav.Link>
                                 <Nav.Link style={{color:"#24305E"}} 
                                     href="/" 

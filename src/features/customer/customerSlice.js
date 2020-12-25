@@ -15,6 +15,18 @@ export const customerSlice = createSlice({
         receiverList: []
     },
     reducers: {
+        resetResponseResult: (state) => {
+            state.isSuccess = false;
+            state.errorMessage = '';
+        },
+        setResponseResult: (state, action) => {
+            if (action.payload.success === true) {
+                state.isSuccess = true;
+            } else {
+                state.isSuccess = false;
+                state.errorMessage = action.payload.message;
+            }
+        },
         setSendHistory: (state, action) => {
             state.sendHistory = action.payload;
         },
@@ -24,18 +36,28 @@ export const customerSlice = createSlice({
         setReceiverList: (state, action) => {
             state.receiverList = action.payload;
         },
-        setAddReceiverResult: (state, action) => {
-            if (action.payload.success === true) {
-                state.isSuccess = true;
-            } else {
-                state.isSuccess = false;
-                state.errorMessage = action.payload.message;
-            }
+        addReceiver: (state, action) => {
+            //update state.receiverList
+        },
+        editReceiver: (state, action) => {
+            //update state.receiverList
+        },
+        removeReceiver: (state, action) => {
+            //update state.receiverList
         }
     },
 });
 
-export const { setSendHistory, setReceiveHistory, setReceiverList, setAddReceiverResult } = customerSlice.actions;
+export const {
+    resetResponseResult,
+    setResponseResult,
+    setSendHistory,
+    setReceiveHistory,
+    setReceiverList,
+    addReceiver,
+    editReceiver,
+    removeReceiver
+} = customerSlice.actions;
 
 export const sendHistoryAsync = () => async dispatch => {
     const response = await axios.post(`http://localhost:3001/customer/send-history`, { ID: localStorage.userID });
@@ -54,7 +76,20 @@ export const receiverListAsync = () => async dispatch => {
 
 export const addReceiverAsync = (number, nickName) => async dispatch => {
     const response = await axios.post(`http://localhost:3001/customer/add-receiver`, { UserID: localStorage.userID, ReceiverNumber: number, NickName: nickName });
-    dispatch(setAddReceiverResult(response.data));
+    dispatch(setResponseResult(response.data));
+    dispatch(addReceiver(response.data));
+};
+
+export const editReceiverAsync = (ID, newNickName) => async dispatch => {
+    const response = await axios.post(`http://localhost:3001/customer/edit-receiver`, { ID: ID, NickName: newNickName });
+    dispatch(setResponseResult(response.data));
+    dispatch(editReceiver(response.data));
+};
+
+export const removeReceiverAsync = (ID) => async dispatch => {
+    const response = await axios.post(`http://localhost:3001/customer/remove-receiver`, { ID: ID });
+    dispatch(setResponseResult(response.data));
+    dispatch(removeReceiver(response.data));
 };
 
 

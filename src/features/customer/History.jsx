@@ -1,7 +1,7 @@
 import React,{useEffect} from 'react';
 import {Table, Container, Row, Button} from 'react-bootstrap';
 import {useSelector, useDispatch} from 'react-redux';
-import {sendHistoryAsync, receiveHistoryAsync} from '../customer/customerSlice';
+import {sendHistoryAsync, receiveHistoryAsync} from './customerSlice';
 
 function History() {
 
@@ -64,7 +64,7 @@ function History() {
                             </tr>
                         </thead>
                         <tbody align="center" style={{color:"gray", fontWeight:"600"}}>
-                            {sendHistoryList.map(item => (
+                            {receiveHistoryList.map(item => (
                                 <tr key={item.ID}>
                                     <td>{item.DateSend}</td>
                                     <td>{item.Content}</td>

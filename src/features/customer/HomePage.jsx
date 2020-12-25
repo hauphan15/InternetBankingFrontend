@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container,Row,Col,Card,Carousel,Jumbotron,Button} from 'react-bootstrap';
+import {Container,Row,Col,Card,Jumbotron,Button} from 'react-bootstrap';
 
  function HomePage() {
 

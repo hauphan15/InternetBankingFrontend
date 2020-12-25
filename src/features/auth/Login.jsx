@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from 'react';
 import { login } from './authSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { Form, Button,Container,Row, Col,Jumbotron,Spinner } from 'react-bootstrap';
+import { Form, Button,Container,Row, Col,Jumbotron } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
 export function Login() {

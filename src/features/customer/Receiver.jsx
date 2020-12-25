@@ -1,22 +1,39 @@
 import React,{useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Table,Container, Row, Button, Modal, Form} from 'react-bootstrap';
-import {receiverListAsync, addReceiverAsync} from './customerSlice';
+import {
+    resetResponseResult,
+    receiverListAsync, 
+    addReceiverAsync, 
+    editReceiverAsync, 
+    removeReceiverAsync} from './customerSlice';
 
 function Receiver() {
 
     const receiverList = useSelector(state => state.customer.receiverList);
-    const isAddReceiverSuccess =  useSelector(state => state.customer.isSuccess);
+    const isActionSuccess =  useSelector(state => state.customer.isSuccess);
     const errorMessage = useSelector(state => state.customer.errorMessage);
-
+    const dispatch0 = useDispatch();
     const dispatch1 = useDispatch();
     const dispatch2 = useDispatch();
+    const dispatch3 = useDispatch();
+    const dispatch4 = useDispatch();
+    const dispatch5 = useDispatch();
+    const dispatch6 = useDispatch();
 
     const [showAddModal, setShowAddModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
+    const [showRemoveModal, setShowRemoveModal] = useState(false);
 
+    //number và nickname cho add modal
     const [number, setNumber] = useState('');
     const [nickName, setNickName]  = useState('');
+
+    //number, nickname cho selected row
+    const [selectedId, setSelectedId] = useState('');
+    const [selectedNumber, setSelectedNumber] = useState('');
+    const [selectedNickName, setSelectedNickName]  = useState('');
+
 
     const [showResult, setShowResult] = useState(false);
 
@@ -29,9 +46,11 @@ function Receiver() {
         setNickName('');
         setShowAddModal(false);
         setShowEditModal(false);
+        setShowRemoveModal(false);
     }
 
     function handleAddReceiver(){
+        dispatch0(resetResponseResult());
         dispatch2(addReceiverAsync(number, nickName));
 
         setTimeout(()=>{
@@ -43,6 +62,47 @@ function Receiver() {
         }, 4000);
     }
 
+    function handleShowEditModal(id, accountNumber, nickName){
+        setSelectedId(id);
+        setSelectedNumber(accountNumber);
+        setSelectedNickName(nickName);
+        setShowEditModal(true);
+    }
+
+    function handleShowRemoveModal(id, accountNumber, nickName){
+        setSelectedId(id);
+        setSelectedNumber(accountNumber);
+        setSelectedNickName(nickName);
+        setShowRemoveModal(true);
+    }
+
+    function handleEditReceiver(){
+        dispatch5(resetResponseResult());
+        dispatch3(editReceiverAsync(selectedId, selectedNickName));
+
+        setTimeout(()=>{
+            setShowResult(true);
+        }, 1000);
+
+        setTimeout(()=>{
+            setShowResult(false);
+        }, 4000);
+        setShowEditModal(true);
+    }
+
+    function handleRemoveReceiver(){
+        dispatch6(resetResponseResult());
+        dispatch4(removeReceiverAsync(selectedId));
+
+        setTimeout(()=>{
+            setShowResult(true);
+        }, 1000);
+
+        setTimeout(()=>{
+            setShowResult(false);
+        }, 4000);
+    }
+    
     return (
         <div>
             <Container style={{marginTop:"50px"}}>
@@ -76,13 +136,17 @@ function Receiver() {
                                     <td>
                                         <ul style={{display:"flex",justifyContent:"space-around", paddingLeft:"0px", marginBottom:"0px"}}>
                                             <li style={{display:"inline-block"}}>
-                                                <Button onClick={()=>setShowEditModal(true)} style={{backgroundColor:"#24305E", borderRadius:"20px",fontSize:"12px", width:"90px"}}>
-                                                    <i style={{marginRight:"5px"}} className="fas fa-edit"></i> Edit
+                                                <Button onClick={()=>handleShowEditModal(item.ID, item.AccountNumber, item.NickName)} 
+                                                style={{backgroundColor:"#24305E", borderRadius:"20px",fontSize:"12px", width:"90px"}}>
+                                                    <i style={{marginRight:"5px"}} className="fas fa-edit"></i>
+                                                    Edit
                                                 </Button>
                                             </li>
                                             <li style={{display:"inline-block"}}>
-                                                <Button style={{backgroundColor:"#24305E", borderRadius:"20px", fontSize:"12px", width:"90px"}}>
-                                                    <i style={{marginRight:"5px"}} className="fas fa-trash-alt"></i>Remove
+                                                <Button onClick={()=>handleShowRemoveModal(item.ID, item.AccountNumber, item.NickName)} 
+                                                style={{backgroundColor:"#24305E", borderRadius:"20px", fontSize:"12px", width:"90px"}}>
+                                                    <i style={{marginRight:"5px"}} className="fas fa-trash-alt"></i>
+                                                    Remove
                                                 </Button>
                                             </li>
                                         </ul>
@@ -107,11 +171,11 @@ function Receiver() {
                         </Form.Group>
                         
                         <Form.Group>
-                            {isAddReceiverSuccess === true && showResult === true
+                            {isActionSuccess === true && showResult === true
                             ?<h6 style={{color: "green", textAlign:"center"}}>Success</h6>
                             :null}
 
-                            {isAddReceiverSuccess === false && showResult === true
+                            {isActionSuccess === false && showResult === true
                             ?<h6 style={{color: "red", textAlign:"center"}}>{errorMessage}</h6>
                             :null}
                         </Form.Group>
@@ -132,18 +196,59 @@ function Receiver() {
                     <Modal.Title style={{color:"#24305E"}}>Edit receiver</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form>
-                        <Form.Control type="number" placeholder="Receiver's checking account number"/>
+                    <Form.Group>
+                        <Form.Control type="number" value={selectedNumber} readOnly/>
                         <br/>
-                        <Form.Control type="text" placeholder="Receiver's nick name" />
-                    </Form>
+                        <Form.Control type="text" value={selectedNickName} onChange={(event) => setSelectedNickName(event.target.value)}/>
+                    </Form.Group>
+                    <Form.Group>
+                            {isActionSuccess === true && showResult === true
+                            ?<h6 style={{color: "green", textAlign:"center"}}>Success</h6>
+                            :null}
+
+                            {isActionSuccess === false && showResult === true
+                            ?<h6 style={{color: "red", textAlign:"center"}}>{errorMessage}</h6>
+                            :null}
+                    </Form.Group>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button style={{backgroundColor:"#24305E", width:"90px", borderRadius:"20px",fontSize:"12px"}} onClick={handleCloseModal}>
                         <i style={{marginRight:"5px"}} className="fas fa-window-close"></i>Close
                     </Button>
-                    <Button style={{backgroundColor:"#24305E", width:"90px", borderRadius:"20px",fontSize:"12px"}} onClick={()=>setShowEditModal(false)}>
+                    <Button style={{backgroundColor:"#24305E", width:"90px", borderRadius:"20px",fontSize:"12px"}} onClick={handleEditReceiver}>
                         <i style={{marginRight:"5px"}} className="fas fa-save"></i>Save
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+            {/* Remove modal */}
+            <Modal show={showRemoveModal} onHide={()=>setShowRemoveModal(false)} backdrop="static" centered>
+                <Modal.Header closeButton>
+                    <Modal.Title style={{color:"#24305E"}}>Are you sure to remove this receiver</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form.Group>
+                        <Form.Control type="number" value={selectedNumber} readOnly/>
+                        <br/>
+                        <Form.Control type="text" value={selectedNickName} readOnly/>
+                    </Form.Group>
+                    <Form.Group>
+                            {isActionSuccess === true && showResult === true
+                            ?<h6 style={{color: "green", textAlign:"center"}}>Success</h6>
+                            :null}
+
+                            {isActionSuccess === false && showResult === true
+                            ?<h6 style={{color: "red", textAlign:"center"}}>{errorMessage}</h6>
+                            :null}
+                    </Form.Group>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button style={{backgroundColor:"#24305E", width:"90px", borderRadius:"20px",fontSize:"12px"}} onClick={handleCloseModal}>
+                        <i style={{marginRight:"5px"}} className="fas fa-window-close"></i>
+                        Cancle
+                    </Button>
+                    <Button style={{backgroundColor:"#24305E", width:"90px", borderRadius:"20px",fontSize:"12px"}} onClick={handleRemoveReceiver}>
+                        <i style={{marginRight:"5px"}} className="fas fa-save"></i>
+                        Remove
                     </Button>
                 </Modal.Footer>
             </Modal>
