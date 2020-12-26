@@ -5,6 +5,10 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import Badge from '@material-ui/core/Badge';
 import {logout} from '../auth/authSlice';
 import {getAllNotificationAsync, seenAllNotificationAsync} from './headerSlice';
+import HistoryIcon from '@material-ui/icons/History';
+import ListAltIcon from '@material-ui/icons/ListAlt';
+import SwapVertIcon from '@material-ui/icons/SwapVert';
+import CreditCardIcon from '@material-ui/icons/CreditCard';
 
 function Header() {
     const dispatch = useDispatch();
@@ -15,8 +19,10 @@ function Header() {
     const notifications = useSelector(state => state.header.notification);  
 
     useEffect(() => {
-        dispatch1(getAllNotificationAsync());
-    }, []);
+        if(localStorage.access_token !=='' || loggedIn===true){
+            dispatch1(getAllNotificationAsync());
+        }
+    }, [loggedIn, localStorage.access_token]);
 
     function handleLogout(){
         dispatch(logout())
@@ -35,20 +41,17 @@ function Header() {
                         Internet Banking
                     </Navbar.Brand>
                         <Nav className="mr-auto" style={{fontWeight:"500"}}>
-                                <Nav.Link style={{color:"#24305E"}} href="/customer/homepage">
-                                    Overview
-                                </Nav.Link>
                                 <Nav.Link style={{color:"#24305E"}} href="#Account">
-                                    Account
+                                    <CreditCardIcon/>Account
                                 </Nav.Link>
-                                <Nav.Link style={{color:"#24305E"}} href="#Transaction">
-                                    Transaction
+                                <Nav.Link style={{color:"#24305E"}} href="/customer/transaction">
+                                    <SwapVertIcon/>Transaction
                                 </Nav.Link>
                                 <Nav.Link style={{color:"#24305E"}} href="/customer/history">
-                                    History
+                                    <HistoryIcon/>History
                                 </Nav.Link>
                                 <Nav.Link style={{color:"#24305E"}} href="/customer/receiver">
-                                    Receiver List
+                                    <ListAltIcon/>Receiver List
                                 </Nav.Link>
                         </Nav>
                         <Nav style={{marginLeft:"50px"}} className="justify-content-end">

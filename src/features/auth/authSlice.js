@@ -5,41 +5,35 @@ export const authSlice = createSlice({
     name: 'login',
     initialState: {
         loggedIn: null,
-        userID: null,
         permission: '',
-        username: '',
-        accessToken: ''
     },
     reducers: {
         setUserInfo: (state, action) => {
             if (action.payload.authenticated) {
                 state.loggedIn = true;
-                state.userID = action.payload.userInfo.ID;
-                state.permission = action.payload.userInfo.permission;
-                state.username = action.payload.userInfo.UserLogin;
-                state.accessToken = action.payload.accessToken;
-                state.notification = action.payload.notification;
+                state.permission = action.payload.userInfo.Permission;
                 localStorage.setItem('access_token', action.payload.accessToken);
                 localStorage.setItem('username', action.payload.userInfo.UserLogin);
                 localStorage.setItem('userID', action.payload.userInfo.ID);
+                if (action.payload.userInfo.Permission === 'customer') {
+                    localStorage.setItem('checkingAccountNumber', action.payload.checkingAccountInfo.AccountNumber);
+                    if (action.payload.savingAccountInfo.length > 0) {
+                        localStorage.setItem('savingAccountNumber', action.payload.savingAccountInfo.AccountNumber);
+                    }
+                }
             } else {
                 state.loggedIn = false;
-                state.accessToken = '';
                 localStorage.setItem('access_token', '');
-                localStorage.setItem('username', '');
-                localStorage.setItem('userID', '');
             }
         },
         logout: state => {
             state.loggedIn = false;
-            state.accessToken = '';
-            state.userID = null;
             state.permission = '';
-            state.username = '';
-            state.notification = null;
             localStorage.setItem('access_token', '');
             localStorage.setItem('username', '');
             localStorage.setItem('userID', '');
+            localStorage.setItem('checkingAccountNumber', '');
+            localStorage.setItem('savingAccountNumber', '');
         }
     },
 });
@@ -48,6 +42,7 @@ export const { logout, setUserInfo, seenAllNotification } = authSlice.actions;
 
 export const login = (username, password) => async dispatch => {
     const response = await axios.post(`http://localhost:3001/login`, { username: username, password: password });
+    console.log(response.data);
     dispatch(setUserInfo(response.data));
 };
 

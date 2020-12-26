@@ -6,6 +6,7 @@ import Header from './features/header/Header';
 import History from './features/customer/History';
 import Footer from './features/footer/Footer';
 import Receiver from './features/customer/Receiver';
+import Transaction from './features/customer/Transaction';
 
 import {
   BrowserRouter as Router,
@@ -22,6 +23,7 @@ function App() {
             <PrivateRoute path='/customer/homepage' component={CustomerHomePage}/> 
             <PrivateRoute path='/customer/history' component={History}/> 
             <PrivateRoute path='/customer/receiver' component={Receiver}/> 
+            <PrivateRoute path='/customer/transaction' component={Transaction}/>
             <Route path="/"> 
                 <Login /> 
             </Route>

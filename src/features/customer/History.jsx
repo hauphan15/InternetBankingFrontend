@@ -19,7 +19,7 @@ function History() {
         <div>
             <Container style={{marginTop:"50px"}}>
                 <Row>
-                    <h4 style={{color:"#24305E"}}>Send history</h4>
+                    <h4 style={{color:"#24305E"}}>Send History</h4>
                     <br/>
                     <br/>
                     <Table style={{ backgroundColor:"white"}}>
@@ -50,7 +50,7 @@ function History() {
                     </Table>
                 </Row>
                 <Row>
-                    <h4 style={{color:"#24305E"}}>Receive history</h4>
+                    <h4 style={{color:"#24305E"}}>Receive History</h4>
                     <br/>
                     <br/>
                     <Table style={{ backgroundColor:"white"}}>

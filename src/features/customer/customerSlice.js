@@ -6,10 +6,6 @@ export const customerSlice = createSlice({
     initialState: {
         isSuccess: null,
         errorMessage: '',
-        fullName: '',
-        checkingAccountNumber: '',
-        savingAccountNumber: '',
-        accessToken: '',
         sendHistory: [],
         receiveHistory: [],
         receiverList: []
@@ -92,5 +88,18 @@ export const removeReceiverAsync = (ID) => async dispatch => {
     dispatch(removeReceiver(response.data));
 };
 
+export const sendOTPCodeAsync = () => async dispatch => {
+    const response = await axios.post(`http://localhost:3001/customer/send-otp`, { ID: localStorage.userID });
+    dispatch(setResponseResult(response.data));
+};
+
+export const transferMoneyAsync = (transactionInfo, otpCode) => async dispatch => {
+    const response = await axios.post(`http://localhost:3001/customer/transfer-money`, transactionInfo, {
+        headers: {
+            'x-otp-code': otpCode
+        }
+    });
+    dispatch(setResponseResult(response.data));
+};
 
 export default customerSlice.reducer;

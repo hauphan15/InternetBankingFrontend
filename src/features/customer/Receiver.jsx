@@ -109,7 +109,7 @@ function Receiver() {
                 <Row>
                     <ul style={{display:"flex", paddingLeft:"0"}}>
                         <li style={{display:"inline-block"}}>
-                            <h4>Receive history</h4>
+                            <h4>Receiver List</h4>
                         </li>
                         <li style={{display:"inline-block", marginLeft:"20px"}}>
                             <Button onClick={()=>setShowAddModal(true)} style={{backgroundColor:"#24305E",fontSize:"12px", borderRadius:"20px", width:"90px", height:"32px"}}>

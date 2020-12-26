@@ -23,7 +23,6 @@ export function Login() {
 
         return function cleanup(){
             isSubscribed = false;
-            console.log('unmounted');
         }
     },[loggedIn]);
 
