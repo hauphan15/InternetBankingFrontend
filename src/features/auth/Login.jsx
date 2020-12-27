@@ -18,7 +18,15 @@ export function Login() {
         let isSubscribed = true;
         if(loggedIn && isSubscribed)
         {
-            history.push('/customer/homepage');
+            if(localStorage.permission === 'customer'){
+                history.push('/customer/homepage');
+            }
+            else if(localStorage.permission === 'admin'){
+                history.push('/admin/homepage');
+            }
+            else if(localStorage.permission === 'employee'){
+                history.push('/employee/homepage');
+            }
         }
 
         return function cleanup(){

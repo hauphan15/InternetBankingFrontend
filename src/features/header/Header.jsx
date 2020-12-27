@@ -35,42 +35,89 @@ function Header() {
     return (
         <div style={{backgroundColor:"white"}}>
             <Container style={{paddingLeft:"0px", paddingRight:"0px"}}>
-                {localStorage.access_token !=='' || loggedIn===true
+                {localStorage.access_token !=='' && localStorage.permission === 'customer'
                 ?<Navbar expand="lg">
                     <Navbar.Brand style={{color:"#24305E", fontSize:"100", fontWeight:"700"}} href="/customer/homepage">
                         Internet Banking
                     </Navbar.Brand>
-                        <Nav className="mr-auto" style={{fontWeight:"500"}}>
-                                <Nav.Link style={{color:"#24305E"}} href="#Account">
-                                    <CreditCardIcon/>Account
-                                </Nav.Link>
-                                <Nav.Link style={{color:"#24305E"}} href="/customer/transaction">
-                                    <SwapVertIcon/>Transaction
-                                </Nav.Link>
-                                <Nav.Link style={{color:"#24305E"}} href="/customer/history">
-                                    <HistoryIcon/>History
-                                </Nav.Link>
-                                <Nav.Link style={{color:"#24305E"}} href="/customer/receiver">
-                                    <ListAltIcon/>Receiver List
-                                </Nav.Link>
-                        </Nav>
-                        <Nav style={{marginLeft:"50px"}} className="justify-content-end">
-                                <Nav.Link style={ {color:"#24305E"}} 
-                                    href="/customer/profile">
-                                        <i style={{marginRight:"5px"}} className="fas fa-user"></i>{localStorage.username}
-                                    </Nav.Link>
-                                <Nav.Link style={{color:"#24305E"}} 
-                                    onClick={handleClickBell} 
-                                    href="/customer/homepage" >
-                                        <Badge badgeContent={notifications.length} color="secondary"><NotificationsIcon/></Badge> Notification
-                                    </Nav.Link>
-                                <Nav.Link style={{color:"#24305E"}} 
-                                    href="/" 
-                                    onClick={handleLogout}>
-                                        <i style={{marginRight:"5px"}} className="fas fa-sign-out-alt"></i>
-                                    Sign out
-                                </Nav.Link>
-                        </Nav>
+                    <Nav className="mr-auto" style={{fontWeight:"500"}}>
+                        <Nav.Link style={{color:"#24305E"}} href="#Account">
+                            <CreditCardIcon/>Account
+                        </Nav.Link>
+                        <Nav.Link style={{color:"#24305E"}} href="/customer/transaction">
+                            <SwapVertIcon/>Transaction
+                        </Nav.Link>
+                        <Nav.Link style={{color:"#24305E"}} href="/customer/history">
+                            <HistoryIcon/>History
+                        </Nav.Link>
+                        <Nav.Link style={{color:"#24305E"}} href="/customer/receiver">
+                            <ListAltIcon/>Receiver List
+                        </Nav.Link>
+                    </Nav>
+                    <Nav style={{marginLeft:"50px"}} className="justify-content-end">
+                        <Nav.Link style={ {color:"#24305E"}} href="/customer/profile">
+                            <i style={{marginRight:"5px"}} className="fas fa-user"></i>{localStorage.username}
+                        </Nav.Link>
+                        <Nav.Link style={{color:"#24305E"}} href="/customer/homepage" onClick={handleClickBell}>
+                                <Badge badgeContent={notifications.length} color="secondary"><NotificationsIcon/></Badge> Notification
+                        </Nav.Link>
+                        <Nav.Link style={{color:"#24305E"}} href="/" onClick={handleLogout}>
+                            <i style={{marginRight:"5px"}} className="fas fa-sign-out-alt"></i>Sign out
+                        </Nav.Link>
+                    </Nav>
+                </Navbar>
+                :null}
+
+                {localStorage.access_token !=='' && localStorage.permission === 'admin'
+                ?<Navbar expand="lg">
+                <Navbar.Brand style={{color:"#24305E", fontSize:"100", fontWeight:"700"}} href="/admin/homepage">Internet Banking</Navbar.Brand>
+                    <Nav className="mr-auto" style={{fontWeight:"500"}}>
+                        <Nav.Link style={{color:"#24305E"}} href="/admin/history">
+                            <HistoryIcon/>Transaction history
+                        </Nav.Link>
+                        <Nav.Link style={{color:"#24305E"}} href="/admin/employee-list">
+                            <ListAltIcon/>Employee management
+                        </Nav.Link>
+                    </Nav>
+                    <Nav style={{marginLeft:"50px"}} className="justify-content-end">
+                        <Nav.Link style={ {color:"#24305E"}} href="/admin/profile">
+                            <i style={{marginRight:"5px"}} className="fas fa-user"></i>{localStorage.username}
+                        </Nav.Link>
+                        <Nav.Link style={{color:"#24305E"}} href="/admin/homepage" onClick={handleClickBell}>
+                            <Badge badgeContent={notifications.length} color="secondary"><NotificationsIcon/></Badge> Notification
+                        </Nav.Link>
+                        <Nav.Link style={{color:"#24305E"}} href="/" onClick={handleLogout}>
+                            <i style={{marginRight:"5px"}} className="fas fa-sign-out-alt"></i> Sign out
+                        </Nav.Link>
+                    </Nav>
+                </Navbar>
+                :null}
+
+                {localStorage.access_token !=='' && localStorage.permission === 'employee'
+                ?<Navbar expand="lg">
+                <Navbar.Brand style={{color:"#24305E", fontSize:"100", fontWeight:"700"}} href="/employee/homepage">Internet Banking</Navbar.Brand>
+                    <Nav className="mr-auto" style={{fontWeight:"500"}}>
+                        <Nav.Link style={{color:"#24305E"}} href="/employee/create-account">
+                            <HistoryIcon/>Create account
+                        </Nav.Link>
+                        <Nav.Link style={{color:"#24305E"}} href="/employee/pay-in">
+                            <ListAltIcon/>Pay in
+                        </Nav.Link>
+                        <Nav.Link style={{color:"#24305E"}} href="/employee/history">
+                            <ListAltIcon/>History
+                        </Nav.Link>
+                    </Nav>
+                    <Nav style={{marginLeft:"50px"}} className="justify-content-end">
+                        <Nav.Link style={ {color:"#24305E"}} href="/employee/profile">
+                            <i style={{marginRight:"5px"}} className="fas fa-user"></i>{localStorage.username}
+                        </Nav.Link>
+                        <Nav.Link style={{color:"#24305E"}} href="/employee/homepage" onClick={handleClickBell}>
+                            <Badge badgeContent={notifications.length} color="secondary"><NotificationsIcon/></Badge> Notification
+                        </Nav.Link>
+                        <Nav.Link style={{color:"#24305E"}} href="/" onClick={handleLogout}>
+                            <i style={{marginRight:"5px"}} className="fas fa-sign-out-alt"></i> Sign out
+                        </Nav.Link>
+                    </Nav>
                 </Navbar>
                 :null}
             </Container>

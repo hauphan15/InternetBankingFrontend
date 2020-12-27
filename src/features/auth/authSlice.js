@@ -5,16 +5,15 @@ export const authSlice = createSlice({
     name: 'login',
     initialState: {
         loggedIn: null,
-        permission: '',
     },
     reducers: {
         setUserInfo: (state, action) => {
             if (action.payload.authenticated) {
                 state.loggedIn = true;
-                state.permission = action.payload.userInfo.Permission;
                 localStorage.setItem('access_token', action.payload.accessToken);
                 localStorage.setItem('username', action.payload.userInfo.UserLogin);
                 localStorage.setItem('userID', action.payload.userInfo.ID);
+                localStorage.setItem('permission', action.payload.userInfo.Permission);
                 if (action.payload.userInfo.Permission === 'customer') {
                     localStorage.setItem('checkingAccountNumber', action.payload.checkingAccountInfo.AccountNumber);
                     if (action.payload.savingAccountInfo.length > 0) {
@@ -28,7 +27,7 @@ export const authSlice = createSlice({
         },
         logout: state => {
             state.loggedIn = false;
-            state.permission = '';
+            localStorage.setItem('permission', '');
             localStorage.setItem('access_token', '');
             localStorage.setItem('username', '');
             localStorage.setItem('userID', '');

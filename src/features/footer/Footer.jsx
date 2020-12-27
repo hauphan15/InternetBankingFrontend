@@ -7,7 +7,7 @@ function Footer() {
 
     return (
         <div style={{backgroundColor:"white", marginTop:"150px"}}>
-            {localStorage.access_token !=='' || loggedIn===true
+            {localStorage.access_token !=='' && localStorage.permission === 'customer'
             ?<Container style={{color:"#24305E"}}>
                 <Row style={{paddingTop:"20px", marginLeft:"0"}}>
                     <Col xs={4} style={{padding:"0"}}>
