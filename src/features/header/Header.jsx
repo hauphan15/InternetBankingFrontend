@@ -100,12 +100,6 @@ function Header() {
                         <Nav.Link style={{color:"#24305E"}} href="/employee/create-account">
                             <HistoryIcon/>Create account
                         </Nav.Link>
-                        <Nav.Link style={{color:"#24305E"}} href="/employee/pay-in">
-                            <ListAltIcon/>Pay in
-                        </Nav.Link>
-                        <Nav.Link style={{color:"#24305E"}} href="/employee/history">
-                            <ListAltIcon/>History
-                        </Nav.Link>
                     </Nav>
                     <Nav style={{marginLeft:"50px"}} className="justify-content-end">
                         <Nav.Link style={ {color:"#24305E"}} href="/employee/profile">
