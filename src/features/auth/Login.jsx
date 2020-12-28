@@ -67,7 +67,6 @@ export function Login() {
                     </Col>
                     <Col>
                         <Form onSubmit={handleLogin} style={{height:"100px", width:"250px",display:"inline-block" ,textAlign:"left", marginTop:"50px"}}>
-                            
                             <Form.Group style={{textAlign:"center"}}>
                                 <h3 style={{ color:"#24305E"}}>Sign in</h3>
                             </Form.Group>
@@ -86,7 +85,6 @@ export function Login() {
 
                             <Button type="submit" style={{width:"inherit", marginTop:"20px", backgroundColor:"#374785"}}> Sign in </Button>
                         </Form>
-                        
                     </Col>
                 </Row>
             </Container>

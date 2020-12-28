@@ -23,8 +23,8 @@ function Transaction() {
 
 
     const [number, setNumber] = useState('');
-    const [amount, setAmount] = useState(null);
-    const [otpCode, setOtpCode] = useState(null);
+    const [amount, setAmount] = useState('');
+    const [otpCode, setOtpCode] = useState('');
     const [message, setMessage] = useState('');
     const [step, setStep] = useState(1);
     const [showProgress, setShowProgress] = useState(false)
@@ -57,6 +57,10 @@ function Transaction() {
         setTimeout(()=>{
             setShowProgress(false);
         },5000);
+    }
+
+    function handleSelectRow(accountNumber){
+        console.log(accountNumber);
     }
 
     return (
@@ -92,7 +96,7 @@ function Transaction() {
                     <Col style={{paddingTop:"30px"}}>
                         <Form onSubmit={handleSubmitForm1} style={{padding:"0px 40px 0px 40px"}}>
                             <Form.Group>
-                                <Form.Label>Receiver's account number:</Form.Label>
+                                <Form.Label style={{color:"#24305E", fontWeight:"600"}}>Receiver's account number:</Form.Label>
                                 <Form.Control required disabled = {step === 1 ? false : true} value={number} onChange={(event)=>setNumber(event.target.value)} type="number" placeholder="Receiver's account number"></Form.Control>
                             </Form.Group>
                             
@@ -112,7 +116,8 @@ function Transaction() {
                                             </thead>
                                             <tbody>
                                                 {receiverList.map(item =>(
-                                                    <tr key={item.ID}>
+                                                    <tr style={{cursor:"pointer"}}
+                                                    onClick={()=>setNumber(item.AccountNumber)} key={item.ID}>
                                                         <td>{item.NickName}</td>
                                                         <td>{item.AccountNumber}</td>
                                                     </tr>
@@ -124,13 +129,13 @@ function Transaction() {
                             </Form.Group>
 
                             <Form.Group>
-                                <Form.Label>Amount:</Form.Label>
+                                <Form.Label style={{color:"#24305E", fontWeight:"600"}}>Amount:</Form.Label>
                                 <Form.Control required disabled = {step === 1 ? false : true} type="number"  placeholder="Amount" 
                                 value={amount} onChange={(event) => setAmount(event.target.value)} />
                             </Form.Group>
 
                             <Form.Group>
-                                <Form.Label>Message:</Form.Label>
+                                <Form.Label style={{color:"#24305E", fontWeight:"600"}}>Message:</Form.Label>
                                 <Form.Control disabled = {step === 1 ? false : true} as="textarea" rows={4} placeholder="Message"
                                 value={message} onChange={(event)=>setMessage(event.target.value)} />
                             </Form.Group>
@@ -146,7 +151,7 @@ function Transaction() {
                     <Col style={{paddingTop:"30px"}}>
                         <Form onSubmit={handleSubmitForm2} style={{padding:"0px 40px 0px 40px"}}>
                             <Form.Group>
-                                <Form.Label>OTP Code:</Form.Label>
+                                <Form.Label style={{color:"#24305E", fontWeight:"600"}}>OTP Code:</Form.Label>
                                 <Form.Control required disabled = {step === 2 ? false : true} type="number" placeholder="OTP Code"
                                 value={otpCode} onChange={(event)=> setOtpCode(event.target.value)} />
                             </Form.Group>

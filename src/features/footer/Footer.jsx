@@ -3,8 +3,6 @@ import {Container, Row, Col} from 'react-bootstrap';
 import {useSelector} from 'react-redux';
 
 function Footer() {
-    const loggedIn = useSelector(state => state.auth.loggedIn);
-
     return (
         <div style={{backgroundColor:"white", marginTop:"150px"}}>
             {localStorage.access_token !=='' && localStorage.permission === 'customer'
