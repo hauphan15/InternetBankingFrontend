@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Tab, Nav } from "react-bootstrap";
 import { useDispatch, useSelector } from 'react-redux';
 import {getCustomerProfileAsync} from './employeeSlice';
+
 function PopUp(props) {
     const customerProfile = useSelector(state => state.employee.customerProfile);
     const customerSendTransactionHistory = useSelector(state => state.employee.customerSendTransactionHistory);
@@ -15,7 +16,7 @@ function PopUp(props) {
         }, 7000);
     }, [])
     const load = () => {
-        if(waiting == 1) {
+        if(waiting === 1) {
             return (
                 <div class="spinner-border text-primary "></div> 
             );
@@ -30,7 +31,7 @@ function PopUp(props) {
               <button className="btn btn-outline-danger mr-1" onClick={()=>{props.sendchoose(-1)}}>close</button>
           </div>
         {load()}
-        <Tab.Content style={{visibility: waiting == 1 ? 'hidden' : ''}}>
+        <Tab.Content style={{visibility: waiting === 1 ? 'hidden' : ''}}>
                 <SendHistory list={customerSendTransactionHistory} />
                 <ReceiverHistory list={customerReceiverTransactionHistory} />
                 </Tab.Content>
@@ -59,7 +60,7 @@ export const MyTab = (props) => {
           style={{
             background: "transparent",
             color: "black",
-            borderBottom: active == 1 ? "2px solid blue" : "",
+            borderBottom: active === 1 ? "2px solid blue" : "",
           }}
         >
           Send History
@@ -75,7 +76,7 @@ export const MyTab = (props) => {
           style={{
             background: "transparent",
             color: "black",
-            borderBottom: active == 2 ? "2px solid blue" : "",
+            borderBottom: active === 2 ? "2px solid blue" : "",
           }}
         >
           Receiver History
@@ -154,13 +155,13 @@ export const TransactionItem = (props) => {
     <div className="card p-0 m-2">
         <div className="row m-0">
                 <div className= "col-sm-2" style={{height:50, padding: "13px 15px", borderLeft: "1px solid #f0f0f0"}}>
-                    <p style={{marginLeft: "30px"}}>{props.type == 1 ? props.value.ReceiverNumber : props.value.SenderNumber}</p>
+                    <p style={{marginLeft: "30px"}}>{props.type === 1 ? props.value.ReceiverNumber : props.value.SenderNumber}</p>
                 </div>
                 <div className= "col-sm-2" style={{height:50, padding: "13px 15px", borderLeft: "1px solid #f0f0f0"}}>
-                    <p style={{marginLeft: "30px"}}>{props.type == 1 ? props.value.ReceiverName : props.value.SenderName}</p>
+                    <p style={{marginLeft: "30px"}}>{props.type === 1 ? props.value.ReceiverName : props.value.SenderName}</p>
                 </div>
                 <div className= "col-sm-2" style={{height:50, padding: "13px 15px", borderLeft: "1px solid #f0f0f0"}}>
-                    <p style={{marginLeft: "30px", color: props.type == 1 ? 'red' : 'green'}}>{props.type == 1 ? "- $" +props.value.Money : "+ $" +props.value.Money}</p>
+                    <p style={{marginLeft: "30px", color: props.type === 1 ? 'red' : 'green'}}>{props.type === 1 ? "- $" +props.value.Money : "+ $" +props.value.Money}</p>
                 </div>
                 <div className= "col-sm-2 " style={{height:50, padding: "13px 15px", borderLeft: "1px solid #f0f0f0"}}>
                     <p style={{marginLeft: "30px"}}>{props.value.DateSend.slice(0,10)}</p>

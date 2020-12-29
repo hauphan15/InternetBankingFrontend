@@ -6,9 +6,9 @@ import {Container,Row,Col,Card,Jumbotron,Button} from 'react-bootstrap';
     return (
         <div >
             <div style={{backgroundColor:"#24305E"}}>
-                <Container >
-                    <Row>
-                        <Col>
+                <div style={{marginRight:"100px", marginLeft:"100px"}}>
+                    <Row style={{margin:"0"}}>
+                        <Col style={{padding:"0"}}>
                             <Jumbotron style={{backgroundColor:"#24305E",paddingLeft:"0",paddingRight:"0", borderRadius:"0"}}>
                                 <h1 style={{color:"white", fontSize:"50px"}}>Internet Banking</h1>
                                 <p  style={{color:"white", width:"500px", fontSize:"30px"}} >
@@ -21,17 +21,17 @@ import {Container,Row,Col,Card,Jumbotron,Button} from 'react-bootstrap';
                                 </p>
                             </Jumbotron>
                         </Col>
-                        <Col align="end">
+                        <Col style={{padding:"0"}} align="end">
                             <img src="/logo.png" style={{width:"300px"}} alt=""/>
                         </Col>
                     </Row>
 
-                </Container>
+                </div>
             </div>
 
             <div style={{marginTop:"50px"}}>
-                <Container>
-                    <Row>
+                <div style={{marginRight:"100px", marginLeft:"100px"}}>
+                    <Row style={{margin:"0"}}>
                         <Col>
                             <Card style={{ width: 'auto',height:"300px",borderRadius:"15px",
                             boxShadow:"0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"}}>
@@ -69,7 +69,7 @@ import {Container,Row,Col,Card,Jumbotron,Button} from 'react-bootstrap';
                             </Card>
                         </Col>
                     </Row>
-                </Container>
+                </div>
             </div>
             {/* <Container>
                 <Row>

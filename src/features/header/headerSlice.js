@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import config from '../../config/default.json';
 import axios from 'axios';
 
 export const headerSlice = createSlice({
@@ -19,12 +20,12 @@ export const headerSlice = createSlice({
 export const { seenAllNotification, getAllNotification } = headerSlice.actions;
 
 export const seenAllNotificationAsync = () => async dispatch => {
-    await axios.post(`http://localhost:3001/customer/seen-all-notification`, { UserID: localStorage.userID });
+    await axios.post(`${config.BaseURL}/customer/seen-all-notification`, { UserID: localStorage.userID });
     dispatch(seenAllNotification());
 };
 
 export const getAllNotificationAsync = () => async dispatch => {
-    const response = await axios.post(`http://localhost:3001/customer/notification`, { UserID: localStorage.userID });
+    const response = await axios.post(`${config.BaseURL}/customer/notification`, { UserID: localStorage.userID });
     dispatch(getAllNotification(response.data));
 };
 

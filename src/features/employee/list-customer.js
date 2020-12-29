@@ -22,7 +22,7 @@ const ListCustomer = (props) => {
     }
 
     return (
-        <div className="card mt-2 shadow-lg" >
+        <div style={{borderRadius:"10px"}} className="card mt-2 shadow-lg" >
             <div style={{height:700}}>
                 <HeadList/>
                 <hr style={{margin:0}}/>
@@ -32,7 +32,7 @@ const ListCustomer = (props) => {
                 <Pagination currentpage={currentPage}/>
             </div>
             {
-                chooseCustomer == -1 ? <div/> : <PopUp ID={chooseCustomer} sendchoose={receiverChoose} />
+                chooseCustomer === -1 ? <div/> : <PopUp ID={chooseCustomer} sendchoose={receiverChoose} />
             }
         </div>
     );

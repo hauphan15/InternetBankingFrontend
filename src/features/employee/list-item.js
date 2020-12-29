@@ -56,7 +56,7 @@ export const Pagination = (props) => {
             <ul className="pagination">
                 <li className={`page-item mr-1 ${props.currentpage === 1?"disabled":""}`}><a className="page-link" href="#">Previous</a></li>
                 <li className="page-item mr-1"><a className="page-link" style={{background: 'blue'}} href="#">{props.currentpage}</a></li>
-                <li className={`page-item mr-1 ${props.currentpage == 1?"disabled":""}`}><a className="page-link" href="#">Next</a></li>
+                <li className={`page-item mr-1 ${props.currentpage === 1?"disabled":""}`}><a className="page-link" href="#">Next</a></li>
             </ul>
         </nav>
     );

@@ -9,6 +9,7 @@ import History from './features/customer/History';
 import Footer from './features/footer/Footer';
 import Receiver from './features/customer/Receiver';
 import Transaction from './features/customer/Transaction';
+import Notification from './features/customer/Notification';
 
 import {
   BrowserRouter as Router,
@@ -26,10 +27,12 @@ function App() {
             <PrivateRoute path='/customer/history' component={History}/> 
             <PrivateRoute path='/customer/receiver' component={Receiver}/> 
             <PrivateRoute path='/customer/transaction' component={Transaction}/>
+            <PrivateRoute path='/customer/notification' component={Notification}/>
 
             <PrivateRoute path='/admin/homepage' component={AdminHomePage}/>
 
             <PrivateRoute path='/employee/homepage' component={EmployeeHomePage}/>
+            
             <Route path="/"> 
                 <Login /> 
             </Route>

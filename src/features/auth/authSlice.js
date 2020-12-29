@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import config from '../../config/default.json';
 import axios from 'axios';
 
 export const authSlice = createSlice({
@@ -40,7 +41,7 @@ export const authSlice = createSlice({
 export const { logout, setUserInfo, seenAllNotification } = authSlice.actions;
 
 export const login = (username, password) => async dispatch => {
-    const response = await axios.post(`http://localhost:3001/login`, { username: username, password: password });
+    const response = await axios.post(`${config.BaseURL}/login`, { username: username, password: password });
     console.log(response.data);
     dispatch(setUserInfo(response.data));
 };

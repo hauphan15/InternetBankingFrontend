@@ -7,7 +7,7 @@ function SearchZone (props) {
         props.sendFilter(filter);
     }
     return (
-        <div className="card mt-3 shadow-lg" >
+        <div style={{borderRadius:"10px"}} className="card mt-3 shadow-lg" >
             <div className="row" style={{margin: "20px 10px"}}>
                 <div className="col-sm-3">
                     <input  type="text" placeholder="customer's name" value={filter.name}

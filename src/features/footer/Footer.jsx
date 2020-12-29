@@ -1,12 +1,13 @@
-import React from 'react';
-import {Container, Row, Col} from 'react-bootstrap';
-import {useSelector} from 'react-redux';
+import React, {useEffect, useState} from 'react';
+import {Row, Col} from 'react-bootstrap';
 
 function Footer() {
+
+
     return (
         <div style={{backgroundColor:"white", marginTop:"150px"}}>
             {localStorage.access_token !=='' && localStorage.permission === 'customer'
-            ?<Container style={{color:"#24305E"}}>
+            ?<div style={{color:"#24305E",marginLeft:"100px", marginRight:"100px"}}>
                 <Row style={{paddingTop:"20px", marginLeft:"0"}}>
                     <Col xs={4} style={{padding:"0"}}>
                         <ul style={{listStyle:"none", padding:"0"}}>
@@ -46,7 +47,7 @@ function Footer() {
                 <Row style={{marginTop:"15px",marginLeft:"0"}}>
                     <h6 style={{fontSize:"13px", fontWeight:"700"}}>Copyright © 2020 Internet Banking. All Right Reserved</h6>
                 </Row>  
-            </Container>
+            </div>
             :null}
         </div>
     );

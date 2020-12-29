@@ -11,7 +11,7 @@ function HomePage() {
         dispatch(getlistCustomerAsync(filter));
     }
     return (
-        <div className="container-fluid" style={{padding: "0 120px 0 120px"}}>
+        <div className="container-fluid" style={{padding: "0 100px 0 100px"}}>
             <SearchZone sendFilter={receiveFilter}/>
             <ListCustomer list={listCustomer} />
         </div>

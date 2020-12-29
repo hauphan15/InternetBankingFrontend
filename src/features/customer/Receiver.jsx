@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {Table,Container, Row, Button, Modal, Form} from 'react-bootstrap';
+import {Table, Row, Button, Modal, Form} from 'react-bootstrap';
 import {
     resetResponseResult,
     receiverListAsync, 
@@ -13,13 +13,7 @@ function Receiver() {
     const receiverList = useSelector(state => state.customer.receiverList);
     const isActionSuccess =  useSelector(state => state.customer.isSuccess);
     const errorMessage = useSelector(state => state.customer.errorMessage);
-    const dispatch0 = useDispatch();
-    const dispatch1 = useDispatch();
-    const dispatch2 = useDispatch();
-    const dispatch3 = useDispatch();
-    const dispatch4 = useDispatch();
-    const dispatch5 = useDispatch();
-    const dispatch6 = useDispatch();
+    const dispatch = useDispatch();
 
     const [showAddModal, setShowAddModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
@@ -38,7 +32,7 @@ function Receiver() {
     const [showResult, setShowResult] = useState(false);
 
     useEffect(() => {
-        dispatch1(receiverListAsync());
+        dispatch(receiverListAsync());
     },[])
 
     function handleCloseModal(){
@@ -50,8 +44,8 @@ function Receiver() {
     }
 
     function handleAddReceiver(){
-        dispatch0(resetResponseResult());
-        dispatch2(addReceiverAsync(number, nickName));
+        dispatch(resetResponseResult());
+        dispatch(addReceiverAsync(number, nickName));
 
         setTimeout(()=>{
             setShowResult(true);
@@ -77,8 +71,8 @@ function Receiver() {
     }
 
     function handleEditReceiver(){
-        dispatch5(resetResponseResult());
-        dispatch3(editReceiverAsync(selectedId, selectedNickName));
+        dispatch(resetResponseResult());
+        dispatch(editReceiverAsync(selectedId, selectedNickName));
 
         setTimeout(()=>{
             setShowResult(true);
@@ -91,8 +85,8 @@ function Receiver() {
     }
 
     function handleRemoveReceiver(){
-        dispatch6(resetResponseResult());
-        dispatch4(removeReceiverAsync(selectedId));
+        dispatch(resetResponseResult());
+        dispatch(removeReceiverAsync(selectedId));
 
         setTimeout(()=>{
             setShowResult(true);
@@ -105,8 +99,8 @@ function Receiver() {
     
     return (
         <div>
-            <Container style={{marginTop:"50px"}}>
-                <Row>
+            <div style={{marginTop:"50px", marginLeft:"100px", marginRight:"100px"}}>
+                <Row style={{margin:"0px"}}>
                     <ul style={{display:"flex", paddingLeft:"0"}}>
                         <li style={{display:"inline-block"}}>
                             <h4>Receiver List</h4>
@@ -156,7 +150,7 @@ function Receiver() {
                         </tbody>
                     </Table>
                 </Row>
-            </Container>
+            </div>
             {/* Add receiver modal */}
             <Modal show={showAddModal} onHide={()=>setShowAddModal(false)} backdrop="static" centered>
                 <Modal.Header closeButton>
