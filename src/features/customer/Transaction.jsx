@@ -56,10 +56,6 @@ function Transaction() {
         },5000);
     }
 
-    function handleSelectRow(accountNumber){
-        console.log(accountNumber);
-    }
-
     return (
         <div style={{marginRight:"100px", marginLeft:"100px"}}>
             <Row style={{textAlign:"center",marginTop:"20px", marginRight:"0px",marginLeft:"0px",backgroundColor:"white", borderRadius:"10px"}}>

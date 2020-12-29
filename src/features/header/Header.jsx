@@ -8,7 +8,6 @@ import {getAllNotificationAsync, seenAllNotificationAsync} from './headerSlice';
 import HistoryIcon from '@material-ui/icons/History';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
-import CreditCardIcon from '@material-ui/icons/CreditCard';
 
 function Header() {
     const dispatch = useDispatch();
@@ -20,7 +19,7 @@ function Header() {
         if(localStorage.access_token !=='' || loggedIn===true){
             dispatch(getAllNotificationAsync());
         }
-    }, [loggedIn, localStorage.access_token]);
+    }, [loggedIn]);
 
     function handleLogout(){
         dispatch(logout())
@@ -39,9 +38,6 @@ function Header() {
                         Internet Banking
                     </Navbar.Brand>
                     <Nav className="mr-auto" style={{fontWeight:"500"}}>
-                        <Nav.Link style={{color:"#24305E"}} href="#Account">
-                            <CreditCardIcon/>Account
-                        </Nav.Link>
                         <Nav.Link style={{color:"#24305E"}} href="/customer/transaction">
                             <SwapHorizIcon/>Transaction
                         </Nav.Link>

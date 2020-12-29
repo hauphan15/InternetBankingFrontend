@@ -14,7 +14,8 @@ export const customerSlice = createSlice({
             senderProfile: { fullName: '' },
             receiverProfile: { fullName: '' }
         },
-        shownNotification: []
+        shownNotification: [],
+        lastFiveHistory: []
     },
     reducers: {
         resetResponseResult: (state) => {
@@ -57,6 +58,9 @@ export const customerSlice = createSlice({
         deleteNotification: (state, action) => {
             const index = state.shownNotification.findIndex(x => x.ID === action.payload);
             state.shownNotification.splice(index, 1);
+        },
+        setLastFiveHistory: (state, action) => {
+            state.lastFiveHistory = action.payload;
         }
     },
 });
@@ -72,7 +76,8 @@ export const {
     removeReceiver,
     setUserProfile,
     setShownNotification,
-    deleteNotification
+    deleteNotification,
+    setLastFiveHistory
 } = customerSlice.actions;
 
 export const sendHistoryAsync = () => async dispatch => {
@@ -178,4 +183,15 @@ export const deleteNotificationAsync = (ID) => async dispatch => {
 
     dispatch(deleteNotification(ID));
 };
+
+export const lastFiveHistoryAsync = () => async dispatch => {
+    const response = await axios.post(`${config.BaseURL}/customer/last-five-history`, { UserID: localStorage.userID }, {
+        headers: {
+            'x-access-token': localStorage.access_token
+        }
+    });
+
+    dispatch(setLastFiveHistory(response.data));
+};
+
 export default customerSlice.reducer;

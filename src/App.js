@@ -24,10 +24,11 @@ function App() {
         <Router>
           <Switch>
             <PrivateRoute path='/customer/homepage' component={CustomerHomePage}/> 
+            <PrivateRoute path='/customer/transaction' component={Transaction}/>
             <PrivateRoute path='/customer/history' component={History}/> 
             <PrivateRoute path='/customer/receiver' component={Receiver}/> 
-            <PrivateRoute path='/customer/transaction' component={Transaction}/>
             <PrivateRoute path='/customer/notification' component={Notification}/>
+            
 
             <PrivateRoute path='/admin/homepage' component={AdminHomePage}/>
 
