@@ -1,12 +1,22 @@
-import React from 'react';
+import React,{useState, useEffect} from 'react';
 import {Row, Col} from 'react-bootstrap';
+import {useSelector} from 'react-redux';
 
 function Footer() {
 
+    const loggedIn = useSelector(state => state.auth.loggedIn);
+    const [show, setShow] = useState(false);
+
+    useEffect(() => {
+        if(loggedIn === true || localStorage.access_token !=='')
+        {
+            setShow(true);
+        }
+    }, [loggedIn])
 
     return (
         <div style={{backgroundColor:"white", marginTop:"150px"}}>
-            {localStorage.access_token !=='' && localStorage.permission === 'customer'
+            {localStorage.access_token !=='' && localStorage.permission === 'customer' && show === true
             ?<div style={{color:"#24305E",marginLeft:"100px", marginRight:"100px"}}>
                 <Row style={{paddingTop:"20px", marginLeft:"0"}}>
                     <Col xs={4} style={{padding:"0"}}>

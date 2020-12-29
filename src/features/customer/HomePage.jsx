@@ -1,21 +1,32 @@
 import React,{useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {Row,Col,Card,Jumbotron,Button, ListGroup, Table} from 'react-bootstrap';
+import {Row,Col,Card,Jumbotron,Button, Table} from 'react-bootstrap';
 import CallMadeIcon from '@material-ui/icons/CallMade';
 import CallReceivedIcon from '@material-ui/icons/CallReceived';
-import {lastFiveHistoryAsync} from './customerSlice';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import {useHistory} from 'react-router-dom';
+import {
+    lastFiveHistoryAsync,
+    getAllAccountsAsync
+} from './customerSlice';
 
  function HomePage() {
     const loggedIn = useSelector(state => state.auth.loggedIn);
+
+    const checkingAccount = useSelector(state => state.customer.checkingAccountInfo);
+
+    const savingAccount = useSelector(state => state.customer.savingAccountInfo);
+
     const recentTransaction = useSelector(state => state.customer.lastFiveHistory);
     const history = useHistory();
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(lastFiveHistoryAsync());
+        if(loggedIn === true || localStorage !== ''){
+            dispatch(getAllAccountsAsync());
+            dispatch(lastFiveHistoryAsync());
+        }
     }, [loggedIn])
 
     function handleClickTalbe(){
@@ -50,17 +61,13 @@ import {useHistory} from 'react-router-dom';
 
             <div style={{marginTop:"40px", marginLeft:"100px", marginRight:"100px"}}>
                 <Card style={{borderRadius:"10px", height:"175px",
-                boxShadow:"0 4px 8px 0 rgba(0,0,0,0.2)",}}>
+                boxShadow:"0 4px 8px 0 rgba(0,0,0,0.2)",
+                backgroundImage:"linear-gradient(to right,#83a4d4,#b6fbff)"}}>
                     <Row style={{margin:"0"}}>
                         <Col>
                             <ul style={{listStyleType:"none", color:"#24305E"}}>
-                                <li style={{fontWeight:"600", fontSize:"30px"}}>Checking Account Balance</li>
-                                <li>
-                                    <ul style={{display:"flex",fontFamily:"fantasy",listStyleType:"none", padding:"0", marginTop:"55px"}}>
-                                        <li style={{fontSize:"40px", marginRight:"10px"}}>$</li>
-                                        <li style={{fontSize:"40px"}}>10000</li>
-                                    </ul>
-                                </li>
+                                <li style={{fontWeight:"600", fontSize:"30px"}}>Checking Account Balance</li>          
+                                <li style={{fontSize:"40px",fontFamily:"fantasy", marginTop:"55px"}}>{checkingAccount.Money}</li> 
                             </ul>
                         </Col>
                         <Col>
@@ -71,38 +78,44 @@ import {useHistory} from 'react-router-dom';
                             paddingInlineStart:"0",marginTop:"130px"}}>
                                 <li>{localStorage.username}</li>
                                 <li>{localStorage.checkingAccountNumber}</li>
-                                <li>12-02-2020</li>
+                                <li>{checkingAccount.DateCreate}</li>
                             </ul>
                         </Col>
                     </Row>
                 </Card>
-                <Card style={{borderRadius:"10px", height:"175px",marginTop:"20px",
-                boxShadow:"0 4px 8px 0 rgba(0,0,0,0.2)",}}>
-                    <Row>
-                        <Col>
-                            <ul style={{listStyleType:"none", color:"#24305E"}}>
-                                <li style={{fontWeight:"600", fontSize:"30px"}}>Saving Account Balance</li>
-                                <li>
-                                    <ul style={{display:"flex",fontFamily:"fantasy",listStyleType:"none", padding:"0", marginTop:"55px"}}>
-                                        <li style={{fontSize:"40px", marginRight:"10px"}}>$</li>
-                                        <li style={{fontSize:"40px"}}>99000</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </Col>
-                        <Col>
-                            <ul style={{display:"flex",color:"gray",
-                            fontFamily:"monospace",fontSize:"25px",
-                            fontWeight:"600",listStyleType:"none", 
-                            justifyContent:"space-between", paddingInlineEnd:"40px",
-                            paddingInlineStart:"0",marginTop:"130px"}}>
-                                <li>{localStorage.username}</li>
-                                <li>0123456789</li>
-                                <li>12-02-2020</li>
-                            </ul>
-                        </Col>
-                    </Row>
-                </Card>
+
+                <div>
+                    {savingAccount.length > 0
+                    ?<div>
+                        {savingAccount.map(item => (
+                            <Card key={item.ID} style={{borderRadius:"10px", height:"175px",marginTop:"20px",
+                            boxShadow:"0 4px 8px 0 rgba(0,0,0,0.2)",
+                            backgroundImage:"linear-gradient(to right,#83a4d4,#b6fbff)"}}>
+                                <Row>
+                                    <Col>
+                                        <ul style={{listStyleType:"none", color:"#24305E"}}>
+                                            <li style={{fontWeight:"600", fontSize:"30px"}}>Saving Account Balance</li>
+                                             <li style={{fontSize:"40px", fontFamily:"fantasy", marginTop:"55px"}}>{item.Money}</li>
+                                        </ul>
+                                    </Col>
+                                    <Col>
+                                        <ul style={{display:"flex",color:"gray",
+                                        fontFamily:"monospace",fontSize:"25px",
+                                        fontWeight:"600",listStyleType:"none", 
+                                        justifyContent:"space-between", paddingInlineEnd:"40px",
+                                        paddingInlineStart:"0",marginTop:"130px"}}>
+                                            <li>{localStorage.username}</li>
+                                            <li>{item.AccountNumber}</li>
+                                            <li>{item.DateCreate}</li>
+                                        </ul>
+                                    </Col>
+                                </Row>
+                            </Card>
+                        ))}
+                    </div>
+                    :null}
+                </div>
+                
                 <div style={{marginTop:"40px"}}>
                     <h4>Recent transactions</h4>
                     <Table hover style={{ backgroundColor:"white"}} onClick={handleClickTalbe}>

@@ -15,7 +15,9 @@ export const customerSlice = createSlice({
             receiverProfile: { fullName: '' }
         },
         shownNotification: [],
-        lastFiveHistory: []
+        lastFiveHistory: [],
+        checkingAccountInfo: {},
+        savingAccountInfo: [],
     },
     reducers: {
         resetResponseResult: (state) => {
@@ -61,6 +63,10 @@ export const customerSlice = createSlice({
         },
         setLastFiveHistory: (state, action) => {
             state.lastFiveHistory = action.payload;
+        },
+        setAllAccounts: (state, action) => {
+            state.checkingAccountInfo = action.payload.checkingAccountInfo;
+            state.savingAccountInfo = action.payload.savingAccountInfo;
         }
     },
 });
@@ -77,7 +83,8 @@ export const {
     setUserProfile,
     setShownNotification,
     deleteNotification,
-    setLastFiveHistory
+    setLastFiveHistory,
+    setAllAccounts
 } = customerSlice.actions;
 
 export const sendHistoryAsync = () => async dispatch => {
@@ -192,6 +199,16 @@ export const lastFiveHistoryAsync = () => async dispatch => {
     });
 
     dispatch(setLastFiveHistory(response.data));
+};
+
+export const getAllAccountsAsync = () => async dispatch => {
+    const response = await axios.post(`${config.BaseURL}/customer/accounts`, { UserID: localStorage.userID }, {
+        headers: {
+            'x-access-token': localStorage.access_token
+        }
+    });
+
+    dispatch(setAllAccounts(response.data));
 };
 
 export default customerSlice.reducer;
