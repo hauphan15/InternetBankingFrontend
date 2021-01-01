@@ -12,6 +12,7 @@ export const employeeSlice = createSlice({
         customerSavingAccount: {},
         customerSendTransactionHistory: [],
         customerReceiverTransactionHistory: [],
+        statusHistory : false,
     },
     reducers: {
         setlistCustomer: (state, action) => {
@@ -27,11 +28,15 @@ export const employeeSlice = createSlice({
             state.customerSavingAccount = action.payload.customer[2];
             state.customerSendTransactionHistory = action.payload.customer[3];
             state.customerReceiverTransactionHistory = action.payload.customer[4];
+            state.statusHistory = true;
+        },
+        reSetTransactionHistory: (state) => {
+            state.statusHistory = false;
         }
     }
 });
 
-export const { setlistCustomer, setCustomerProfile } = employeeSlice.actions;
+export const { setlistCustomer, setCustomerProfile, reSetTransactionHistory } = employeeSlice.actions;
 
 export const getlistCustomerAsync = filter => async dispatch => {
     const response = await axios.post('http://localhost:3001/employee/get-customers', filter);
@@ -43,6 +48,9 @@ export const getCustomerProfileAsync = ID => async dispatch => {
     const response = await axios.post('http://localhost:3001/employee/get-customer', {ID: ID});
     //console.log(response.data);
     dispatch(setCustomerProfile(response.data));
+};
+export const resetTransaction = () => async dispatch => {
+    dispatch(reSetTransactionHistory());
 };
 
 export default employeeSlice.reducer;

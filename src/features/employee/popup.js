@@ -1,27 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { Tab, Nav } from "react-bootstrap";
 import { useDispatch, useSelector } from 'react-redux';
-import {getCustomerProfileAsync} from './employeeSlice';
+import {getCustomerProfileAsync,resetTransaction} from './employeeSlice';
 
 function PopUp(props) {
     const customerProfile = useSelector(state => state.employee.customerProfile);
     const customerSendTransactionHistory = useSelector(state => state.employee.customerSendTransactionHistory);
     const customerReceiverTransactionHistory = useSelector(state => state.employee.customerReceiverTransactionHistory);
-    const [waiting, setWaiting] = useState(1);
+    const status = useSelector(state => state.employee.statusHistory);
+    const [waiting, setWaiting] = useState(true);
     const dispatch = useDispatch();
-    useEffect(async () => {
-        dispatch(getCustomerProfileAsync(props.ID));
-        setTimeout(() => {
-            setWaiting(0);
-        }, 7000);
-    }, [])
-    const load = () => {
-        if(waiting === 1) {
-            return (
-                <div class="spinner-border text-primary "></div> 
-            );
+    useEffect(() => {
+      if(status) {
+        setWaiting(false);
+      }
+      else{
+        if(waiting) {
+          dispatch(getCustomerProfileAsync(props.ID));
         }
-    }
+      }
+        return()=>{
+          dispatch(resetTransaction()); 
+        }
+    }, [status])
   return (
     <div className="popup">
       <div className="popup-inner" style={{overflowY:"scroll"}}>
@@ -30,11 +31,16 @@ function PopUp(props) {
               <MyTab />
               <button className="btn btn-outline-danger mr-1" onClick={()=>{props.sendchoose(-1)}}>close</button>
           </div>
-        {load()}
-        <Tab.Content style={{visibility: waiting === 1 ? 'hidden' : ''}}>
+        {waiting ? <div className="" style={{position: 'absolute', top:'45%', left:'50%'}}>
+                  <div className="spinner-border text-primary "></div>
+                </div> 
+                :
+                        <Tab.Content style={{visibility: waiting === 1 ? 'hidden' : ''}}>
                 <SendHistory list={customerSendTransactionHistory} />
                 <ReceiverHistory list={customerReceiverTransactionHistory} />
                 </Tab.Content>
+
+                }
         </Tab.Container>
       </div>
     </div>

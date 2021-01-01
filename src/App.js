@@ -10,6 +10,7 @@ import Footer from './features/footer/Footer';
 import Receiver from './features/customer/Receiver';
 import Transaction from './features/customer/Transaction';
 import Notification from './features/customer/Notification';
+import CreateAccount from './features/employee/create-account';
 
 import {
   BrowserRouter as Router,
@@ -33,6 +34,7 @@ function App() {
             <PrivateRoute path='/admin/homepage' component={AdminHomePage}/>
 
             <PrivateRoute path='/employee/homepage' component={EmployeeHomePage}/>
+            <PrivateRoute path='/employee/create-account' component={CreateAccount} />
             
             <Route path="/"> 
                 <Login /> 

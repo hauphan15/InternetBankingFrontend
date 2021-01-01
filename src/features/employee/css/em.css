@@ -24,6 +24,47 @@
     margin: auto;
     margin-top: 100px;
     width: 80%;
-    height: 700px;
+    height: 500px;
     background: white;
   }
+
+  .from-header {
+    display: flex;
+    align-items: center;
+  }
+
+  .from-header::after{
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #808080;
+  }
+
+  .from-header::after {
+    margin-left: 20px;
+    margin-right: 50px;
+}
+
+.form-input {
+  outline: none;
+  width: 80%;
+  border-radius: 15px;
+  padding: 0 10px 0 10px;
+  height: 30px;
+}
+.form-label {
+  height: 30px;
+}
+
+.form-input-number {
+  outline: none;
+  width: 80%;
+  border-radius: 15px;
+  padding: 0 10px 0 10px;
+  height: 30px;
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
