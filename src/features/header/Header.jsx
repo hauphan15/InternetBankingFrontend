@@ -49,7 +49,7 @@ function Header() {
                         </Nav.Link>
                     </Nav>
                     <Nav style={{marginLeft:"50px"}} className="justify-content-end">
-                        <Nav.Link style={ {color:"#24305E"}} href="/customer/profile">
+                        <Nav.Link style={ {color:"#24305E"}} href="/customer/personal">
                             <i style={{marginRight:"5px"}} className="fas fa-user"></i>{localStorage.username}
                         </Nav.Link>
                         <Nav.Link style={{color:"#24305E"}} href="/customer/notification" onClick={handleClickBell}>

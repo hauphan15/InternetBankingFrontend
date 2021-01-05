@@ -57,8 +57,8 @@ export function Login() {
             boxShadow:"0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
             backgroundColor:"white", width:"800px"}}>
                 <Row>
-                    <Col style={{backgroundColor:"#374785", borderRadius:"30px 0px 0px 30px"}}>
-                        <Jumbotron style={{backgroundColor:"#374785", borderRadius:"30px 0px 0px 30px", color:"white"}}>
+                    <Col style={{backgroundColor:"#24305E", borderRadius:"30px 0px 0px 30px"}}>
+                        <Jumbotron style={{backgroundColor:"#24305E", borderRadius:"30px 0px 0px 30px", color:"white"}}>
                             <h1 style={{fontSize:"40px"}}>Welcome to Internet Banking</h1>
                             <p style={{marginTop:"25px", fontSize:"20px"}}>
                                 We provide you the easiest way to transfer your money to everyone
@@ -80,10 +80,10 @@ export function Login() {
                             </Form.Group>
 
                             <div align="end">
-                                <a style={{fontSize:"13px", textDecoration:"none", color:"#374785"}} href="">Forget your password</a>
+                                <a style={{fontSize:"13px", fontWeight:"600",textDecoration:"none", color:"#24305E"}} href="/forgot-password">Forgot your password ?</a>
                             </div>
 
-                            <Button type="submit" style={{width:"inherit", marginTop:"20px", backgroundColor:"#374785"}}> Sign in </Button>
+                            <Button type="submit" style={{width:"inherit", marginTop:"20px", backgroundColor:"#24305E"}}> Sign in </Button>
                         </Form>
                     </Col>
                 </Row>

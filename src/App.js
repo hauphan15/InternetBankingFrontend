@@ -11,6 +11,8 @@ import Receiver from './features/customer/Receiver';
 import Transaction from './features/customer/Transaction';
 import Notification from './features/customer/Notification';
 import CreateAccount from './features/employee/create-account';
+import ForgotPassword from './features/customer/ForgotPassword';
+import Personal from './features/customer/Personal';
 
 import {
   BrowserRouter as Router,
@@ -29,16 +31,17 @@ function App() {
             <PrivateRoute path='/customer/history' component={History}/> 
             <PrivateRoute path='/customer/receiver' component={Receiver}/> 
             <PrivateRoute path='/customer/notification' component={Notification}/>
+            <PrivateRoute path='/customer/personal' component={Personal}/>
             
 
             <PrivateRoute path='/admin/homepage' component={AdminHomePage}/>
 
             <PrivateRoute path='/employee/homepage' component={EmployeeHomePage}/>
             <PrivateRoute path='/employee/create-account' component={CreateAccount} />
-            
-            <Route path="/"> 
-                <Login /> 
-            </Route>
+          
+            <Route exact path="/" component={Login} /> 
+
+            <Route path="/forgot-password" component={ForgotPassword} />
 
           </Switch>
         </Router>

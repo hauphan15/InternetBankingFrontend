@@ -17,6 +17,7 @@ import {
     const checkingAccount = useSelector(state => state.customer.checkingAccountInfo);
 
     const savingAccount = useSelector(state => state.customer.savingAccountInfo);
+    console.log(savingAccount);
 
     const recentTransaction = useSelector(state => state.customer.lastFiveHistory);
     const history = useHistory();
@@ -63,7 +64,7 @@ import {
                 <Card style={{borderRadius:"10px", height:"175px",
                 boxShadow:"0 4px 8px 0 rgba(0,0,0,0.2)",
                 backgroundImage:"linear-gradient(to right,#83a4d4,#b6fbff)"}}>
-                    <Row style={{margin:"0"}}>
+                    <Row>
                         <Col>
                             <ul style={{listStyleType:"none", color:"#24305E"}}>
                                 <li style={{fontWeight:"600", fontSize:"30px"}}>Checking Account Balance</li>          
@@ -77,7 +78,7 @@ import {
                             justifyContent:"space-between", paddingInlineEnd:"40px",
                             paddingInlineStart:"0",marginTop:"130px"}}>
                                 <li>{localStorage.username}</li>
-                                <li>{localStorage.checkingAccountNumber}</li>
+                                <li>{checkingAccount.AccountNumber}</li>
                                 <li>{checkingAccount.DateCreate}</li>
                             </ul>
                         </Col>
