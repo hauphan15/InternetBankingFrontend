@@ -8,6 +8,8 @@ export const adminSlice = createSlice({
         isSuccess: null,
         errorMessage: '',
         employeeList: [],
+        allHistory: [],
+        currentMonthHistory: []
     },
     reducers: {
         resetResponseResult: (state) => {
@@ -24,11 +26,23 @@ export const adminSlice = createSlice({
         },
         setEmployeeList: (state, action) => {
             state.employeeList = action.payload;
+        },
+        setAllHistory: (state, action) => {
+            state.allHistory = action.payload;
+        },
+        setCurrentMonthHistory: (state, action) => {
+            state.currentMonthHistory = action.payload;
         }
     },
 });
 
-export const { setEmployeeList, setResponseResult, resetResponseResult } = adminSlice.actions;
+export const {
+    setEmployeeList,
+    setResponseResult,
+    resetResponseResult,
+    setAllHistory,
+    setCurrentMonthHistory
+} = adminSlice.actions;
 
 export const getEmployeeListAsync = () => async dispatch => {
     const response = await axios.post(`${config.BaseURL}/admin/employee-list`, {
@@ -54,8 +68,25 @@ export const removeEmployeeAsync = (id) => async dispatch => {
             'x-access-token': localStorage.access_token
         }
     });
-    console.log(response.data);
+
     dispatch(setResponseResult(response.data));
 };
 
+export const getAllHistoryAsync = (id) => async dispatch => {
+    const response = await axios.post(`${config.BaseURL}/admin/all-history`, {
+        headers: {
+            'x-access-token': localStorage.access_token
+        }
+    });
+    dispatch(setAllHistory(response.data));
+};
+
+export const getCurrentMonthHistoryAsync = (id) => async dispatch => {
+    const response = await axios.post(`${config.BaseURL}/admin/current-month-history`, {
+        headers: {
+            'x-access-token': localStorage.access_token
+        }
+    });
+    dispatch(setCurrentMonthHistory(response.data));
+};
 export default adminSlice.reducer;

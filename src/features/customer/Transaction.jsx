@@ -4,7 +4,9 @@ import { Col, Form, Row,Dropdown,Table,Button } from 'react-bootstrap';
 import {
     receiverListAsync,
     sendOTPCodeAsync,
-    transferMoneyAsync
+    transferMoneyAsync,
+    getAllAccountsAsync,
+    resetResponseResult,
 } from './customerSlice';
 
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
@@ -16,6 +18,7 @@ function Transaction() {
     const receiverList = useSelector(state => state.customer.receiverList);
     const transactionResult = useSelector(state => state.customer.isSuccess);//true or false
     const errorMessage = useSelector(state => state.customer.errorMessage);
+    const checkingAccount = useSelector(state => state.customer.checkingAccountInfo);
 
     const dispatch = useDispatch();
 
@@ -31,6 +34,10 @@ function Transaction() {
         dispatch(receiverListAsync());
     },[])
 
+    useEffect(() => {
+        dispatch(getAllAccountsAsync());   
+    }, [])
+
     function handleSubmitForm1(event){
         event.preventDefault();
         dispatch(sendOTPCodeAsync());
@@ -39,9 +46,10 @@ function Transaction() {
 
     function handleSubmitForm2(event){
         event.preventDefault();
-
+        dispatch(resetResponseResult());
+        
         const transactionInfo={
-            SenderNumber: localStorage.checkingAccountNumber,
+            SenderNumber: checkingAccount.AccountNumber,
             ReceiverNumber:number,
             Money:amount,
             Content:message

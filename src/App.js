@@ -13,7 +13,8 @@ import Notification from './features/customer/Notification';
 import CreateAccount from './features/employee/create-account';
 import ForgotPassword from './features/customer/ForgotPassword';
 import Personal from './features/customer/Personal';
-
+import ManageEmployee from './features/admin/ManageEmployee';
+import AdminHistory from './features/admin/History';
 import {
   BrowserRouter as Router,
   Switch,
@@ -35,6 +36,8 @@ function App() {
             
 
             <PrivateRoute path='/admin/homepage' component={AdminHomePage}/>
+            <PrivateRoute path='/admin/employee-list' component={ManageEmployee}/>
+            <PrivateRoute path='/admin/history' component={AdminHistory}/>
 
             <PrivateRoute path='/employee/homepage' component={EmployeeHomePage}/>
             <PrivateRoute path='/employee/create-account' component={CreateAccount} />

@@ -77,9 +77,6 @@ function Header() {
                         <Nav.Link style={ {color:"#24305E"}} href="/admin/profile">
                             <i style={{marginRight:"5px"}} className="fas fa-user"></i>{localStorage.username}
                         </Nav.Link>
-                        <Nav.Link style={{color:"#24305E"}} href="/admin/homepage" onClick={handleClickBell}>
-                            <Badge badgeContent={notifications.length} color="secondary"><NotificationsIcon/></Badge> Notification
-                        </Nav.Link>
                         <Nav.Link style={{color:"#24305E"}} href="/" onClick={handleLogout}>
                             <i style={{marginRight:"5px"}} className="fas fa-sign-out-alt"></i> Sign out
                         </Nav.Link>
