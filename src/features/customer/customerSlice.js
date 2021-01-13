@@ -22,7 +22,7 @@ export const customerSlice = createSlice({
     },
     reducers: {
         resetResponseResult: (state) => {
-            state.isSuccess = false;
+            state.isSuccess = null;
             state.errorMessage = '';
         },
         setResponseResult: (state, action) => {
@@ -147,7 +147,7 @@ export const editReceiverAsync = (ID, newNickName) => async dispatch => {
 
 //remove receiver to receiver list
 export const removeReceiverAsync = (ID) => async dispatch => {
-    const response = await axios.post(`${config.BaseURL}/customer/remove-receiver`, { ID: ID }, {
+    const response = await axios.post(`${config.BaseURL}/customer/delete-receiver`, { ID: ID }, {
         headers: {
             'x-access-token': localStorage.access_token
         }
