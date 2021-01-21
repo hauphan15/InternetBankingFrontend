@@ -4,6 +4,8 @@ import axios from 'axios';
 export const employeeSlice = createSlice({
     name: 'employee',
     initialState: {
+        createSuccess: true,
+        loadUserSuccess: true,
         success: true,
         message: '',
         listCustomer: [],
@@ -18,7 +20,7 @@ export const employeeSlice = createSlice({
         setlistCustomer: (state, action) => {
             state.listCustomer = action.payload.listCustomer;
             state.message = action.payload.message;
-            state.success = true;
+            state.loadUserSuccess = true;
         },
         setCustomerProfile: (state, action) => {
             state.success = action.payload.success;
