@@ -52,5 +52,9 @@ export const getCustomerProfileAsync = ID => async dispatch => {
 export const resetTransaction = () => async dispatch => {
     dispatch(reSetTransactionHistory());
 };
-
+export const updateBalance = (ID,Money) => async dispatch => {
+    const response = await axios.post('http://localhost:3001/employee/recharge', {ID: ID, Money: Money});
+    //console.log(response.data);
+    //dispatch(setCustomerProfile(response.data));
+};
 export default employeeSlice.reducer;

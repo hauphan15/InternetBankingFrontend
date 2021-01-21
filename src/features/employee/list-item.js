@@ -1,24 +1,28 @@
+import { yellow } from '@material-ui/core/colors';
 import React, { useEffect } from 'react';
 import PopUp from './popup';
-
+import RechargeModel from './recharge-model'
 export const ListItem = (props) => {
     return (
-        <div className="card list-item m-2" onClick={() => {props.sendchoose(props.value.ID)}} >
+        <div className="card list-item m-2"  >
             <div className="row m-0">
-                <div className= "col-sm-2" style={{height:50, padding: "13px 15px", borderRight: "1px solid #f0f0f0"}}>
+                <div onClick={() => {props.sendchoose(props.value.ID)}} className= "col-sm-2" style={{height:50, padding: "13px 15px", borderRight: "1px solid #f0f0f0"}}>
                     <p style={{marginLeft: "30px"}}>{props.value.IdentificationCardID}</p>
                 </div>
-                <div className= "col-sm-2" style={{height:50, padding: "13px 15px", borderRight: "1px solid #f0f0f0"}}>
+                <div onClick={() => {props.sendchoose(props.value.ID)}} className= "col-sm-2" style={{height:50, padding: "13px 15px", borderRight: "1px solid #f0f0f0"}}>
                     <p style={{marginLeft: "30px"}}>{props.value.FullName}</p>
                 </div>
-                <div className= "col-sm-2 " style={{height:50, padding: "13px 15px", borderRight: "1px solid #f0f0f0"}}>
+                <div onClick={() => {props.sendchoose(props.value.ID)}} className= "col-sm-2 " style={{height:50, padding: "13px 15px", borderRight: "1px solid #f0f0f0"}}>
                     <p style={{marginLeft: "30px"}}>{props.value.Gender}</p>
                 </div>
-                <div className= "col-sm-2" style={{height:50, padding: "13px 15px", borderRight: "1px solid #f0f0f0"}}>
+                <div onClick={() => {props.sendchoose(props.value.ID)}} className= "col-sm-2" style={{height:50, padding: "13px 15px", borderRight: "1px solid #f0f0f0"}}>
                     <p style={{marginLeft: "30px"}}>{props.value.Phone}</p>
                 </div>
-                <div className= "col-sm-3" style={{height:50, padding: "13px 15px", borderRight: "1px solid #f0f0f0"}}>
+                <div onClick={() => {props.sendchoose(props.value.ID)}} className= "col-sm-3" style={{height:50, padding: "13px 15px", borderRight: "1px solid #f0f0f0"}}>
                     <p style={{marginLeft: "30px"}}>{props.value.Email}</p>
+                </div>
+                <div className= "col-sm-1" >
+                    <RechargeModel Id ={props.value.ID} ></RechargeModel>
                 </div>
             </div>
         </div>
