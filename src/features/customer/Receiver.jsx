@@ -33,7 +33,7 @@ function Receiver() {
 
     useEffect(() => {
         dispatch(receiverListAsync());
-    },[])
+    },[isActionSuccess])
 
     function handleCloseModal(){
         setNumber('');

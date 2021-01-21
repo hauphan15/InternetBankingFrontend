@@ -16,7 +16,7 @@ function ManageEmployee() {
 
     useEffect(() => {
         dispatch(getEmployeeListAsync());
-    },[])
+    },[isSuccess])
 
     const [id, setId] = useState('');
     const [username, setUsername] = useState('');
@@ -45,8 +45,11 @@ function ManageEmployee() {
         
     }
 
-    function handleCloseAddModal(){
+    function handleCloseModal(){
         setShowAddModal(false);
+        setShowDetailModal(false);
+        setUsername('');
+        setPassword('');
         setFullName('');
         setBirthday('');
         setGender('');
@@ -166,7 +169,7 @@ function ManageEmployee() {
                 </Row>
             </div>
             {/* Add employee modal */}
-            <Modal show={showAddModal} onHide={()=>setShowAddModal(false)} backdrop="static" centered>
+            <Modal show={showAddModal} onHide={handleCloseModal} backdrop="static" centered>
                 <Modal.Header closeButton>
                     <Modal.Title style={{color:"#24305E"}}>Add employee</Modal.Title>
                 </Modal.Header>
@@ -205,16 +208,16 @@ function ManageEmployee() {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button style={{backgroundColor:"#24305E", width:"90px", borderRadius:"20px",fontSize:"12px"}} onClick={handleCloseAddModal}>
+                    <Button style={{backgroundColor:"#24305E", width:"90px", borderRadius:"20px",fontSize:"12px"}} onClick={handleCloseModal}>
                         <i style={{marginRight:"5px"}} className="fas fa-window-close"></i>Close
                     </Button>
                     <Button style={{backgroundColor:"#24305E", width:"90px", borderRadius:"20px",fontSize:"12px"}} onClick={handleAddEmployee}>
-                        <i style={{marginRight:"5px"}} className="fas fa-save"></i>Save
+                        <i style={{marginRight:"5px"}} className="fas fa-save"></i>Add
                     </Button>
                 </Modal.Footer>
             </Modal>
             {/* Show detail information modal */}
-            <Modal show={showDetailModal} onHide={()=>setShowDetailModal(false)} centered>
+            <Modal show={showDetailModal} onHide={handleCloseModal} backdrop="static" centered>
                 <Modal.Header closeButton>
                     <Modal.Title style={{color:"#24305E"}}>Add employee</Modal.Title>
                 </Modal.Header>
@@ -266,13 +269,13 @@ function ManageEmployee() {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button style={{backgroundColor:"#24305E", width:"90px", borderRadius:"20px",fontSize:"12px"}} onClick={() => setShowDetailModal(false)}>
+                    <Button style={{backgroundColor:"#24305E", width:"90px", borderRadius:"20px",fontSize:"12px"}} onClick={handleCloseModal}>
                         <i style={{marginRight:"5px"}} className="fas fa-window-close"></i>Close
                     </Button>
                 </Modal.Footer>
             </Modal>
             {/* Remove employee  modal */}
-            <Modal show={showRemoveModal} onHide={()=>setShowRemoveModal(false)} backdrop="static" centered>
+            <Modal show={showRemoveModal} onHide={handleCloseModal} backdrop="static" centered>
                 <Modal.Header closeButton>
                     <Modal.Title style={{color:"#24305E"}}>Are you sure to remove this employee</Modal.Title>
                 </Modal.Header>
@@ -291,7 +294,7 @@ function ManageEmployee() {
                     </Form.Group>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button style={{backgroundColor:"#24305E", width:"90px", borderRadius:"20px",fontSize:"12px"}} onClick={()=>setShowRemoveModal(false)}>
+                    <Button style={{backgroundColor:"#24305E", width:"90px", borderRadius:"20px",fontSize:"12px"}} onClick={handleCloseModal}>
                         <i style={{marginRight:"5px"}} className="fas fa-window-close"></i>
                         Cancle
                     </Button>
