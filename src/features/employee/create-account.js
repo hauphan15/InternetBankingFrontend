@@ -18,8 +18,8 @@ function CreateAccount() {
         console.log(response);
     }
     return (
-        <div className="container-fluid" style={{ padding: "0 120px" }} >
-            <div className="card text-center mt-2 p-2"><h3>CreateAccount</h3></div>
+        <div className="container-fluid" style={{ padding: "0 100px" }} >
+            <div className="card text-center mt-2 p-2"><h3>Create Customer Account</h3></div>
             <div className="card" >
                 <div>
                     <div className="from-header">
@@ -157,9 +157,13 @@ function CreateAccount() {
                                 {IsSubmit && !success ? <p style={{marginLeft:16, color: 'red'}}>
                                     create account failed!
                                 </p> 
-                                : <p style={{marginLeft:16, color: 'green'}}>
-                                create account success!
-                                </p> }
+                                : <div>
+                                    {IsSubmit  && success === true
+                                    ?<p style={{marginLeft:16, color: 'green'}}>
+                                        create account success!
+                                    </p>
+                                    :null}
+                                </div>}
                                 <button className="btn btn-outline-success" style={{marginLeft:16, width: 100}}
                                     onClick={() => Register()}>
                                      Create
