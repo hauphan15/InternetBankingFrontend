@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
-import InputGroup from 'react-bootstrap/InputGroup'
-import FormControl from 'react-bootstrap/FormControl'
-import { updateBalance } from './employeeSlice';
+import {Button,Modal,InputGroup,FormControl,Form} from 'react-bootstrap';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 
 const RechargeModel = props => {
     const dispatch = useDispatch();
     const [showModal, setShowModal] = useState(false);
     const [balance, setBalance] = useState("");
     const [money, setMoney] = useState({ money: "" });
+    const [showResult, setshowResult] = useState(false);
+
     const close = () => {
         setShowModal(false);
     }
@@ -28,6 +27,11 @@ const RechargeModel = props => {
     }
     const updateBalanceView = async () => {
         //dispatch(updateBalance(props.Id, money.money));
+
+        setTimeout(()=>{
+            setshowResult(true);
+        },2000)
+
         var m = money.money
         const response = await axios.post(
             'http://localhost:3001/employee/recharge',
@@ -41,25 +45,34 @@ const RechargeModel = props => {
         <div>
             <Modal show={showModal} onHide={close}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Recharge money ${balance == "" ? "" : balance} </Modal.Title>
+                    <Modal.Title>Add money </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <InputGroup>
-                        <FormControl
-                            value={money.money}
-                            name="money"
-                            onChange={changeMoney}
-                            placeholder="Money"
-                            aria-label="Money"></FormControl>
+                <InputGroup>
+                    <Form.Control as="select" custom>
+                            <option>Checking account</option>
+                            <option>Saving account</option>
+                        </Form.Control>
                     </InputGroup>
+                    <br/>
+                    <InputGroup>
+                        <FormControl type="number" value={money.money} name="money"  onChange={changeMoney} placeholder="Amount" aria-label="Money">
+                        </FormControl>
+                    </InputGroup>
+                    <br/>
+                    <div style={{textAlign:'center'}}>
+                        {showResult === true
+                        ?<h5 style={{color:'green'}}>add money successfully</h5>
+                        :null}
+                    </div>
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button className="btn-success" onClick={updateBalanceView}>Confirm</Button>
-                    <Button style={{ background: 'white', color: "blue" }} onClick={close}>Close</Button>
+                    <Button style={{width:'100px'}} onClick={updateBalanceView}>Add</Button>
+                    <Button variant="danger" style={{width:'100px'}} onClick={close}>Cancle</Button>
                 </Modal.Footer>
             </Modal>
-            <button className="btn-success" onClick={open} style={{ color: "khaki" }}>Recharge $$$</button>
+            <Button variant="primary" onClick={open}><MonetizationOnIcon/></Button>
 
         </div>
     )

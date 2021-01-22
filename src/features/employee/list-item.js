@@ -47,6 +47,9 @@ export const HeadList = (props) => {
             <div className= "col-sm-3" style={{borderRight: "1px solid #f0f0f0"}}>
                 <h6 style={{marginLeft:30}}>Email</h6>
             </div>
+            <div style={{borderRight: "1px solid #f0f0f0"}}>
+                <h6 style={{marginLeft:30}}>Action</h6>
+            </div>
         </div>
     );
 }

@@ -25,14 +25,22 @@ function SearchZone (props) {
                         onChange={(e) => {setFitler({...filter, phone: e.target.value})}} />
                 </div> 
                 <div className="col-sm-3">
-                    <button className="btn btn-outline-primary"
-                        onClick={() => sendFilter()}>
-                        Search
-                    </button>
-                    <button className="btn btn-outline-danger ml-3"
-                        onClick={() => {setFitler({name: '', phone: '', cmnd: ''});}}>
-                        Clear
-                    </button>
+                    <ul style={{display:'flex', listStyleType:'none', margin:'0', padding:'0', justifyContent:'flex-end'}}>
+                        <li>
+                            <button className="btn btn-outline-primary" style={{width:'100px'}}
+                            onClick={() => sendFilter()}>
+                                Search
+                            </button>
+                        </li>
+                        <li>
+                            <button className="btn btn-outline-danger ml-3" style={{width:'100px'}}
+                            onClick={() => {setFitler({name: '', phone: '', cmnd: ''});}}>
+                                Clear
+                            </button>
+                        </li>
+                    </ul>
+
+
                 </div>
             </div>
         </div>
