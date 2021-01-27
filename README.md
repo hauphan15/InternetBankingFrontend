@@ -1,3 +1,10 @@
+##Project Description
+This is the simulation of Internet Banking application. 
+Users can register an account and transfer money to other people in a few simple steps. 
+Employees can create an customer account and add money to customer account. 
+Admins can view current month transaction history, manage employee list.
+Technologies used in project: ReactJS/Redux
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
 ## Available Scripts
